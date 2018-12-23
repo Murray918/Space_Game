@@ -1,0 +1,72 @@
+body {
+	margin: 0;
+	background-image: url("./images/background.gif");
+}
+div {
+	width: 100%;
+	height: 25%;
+	position: fixed;
+}
+#playerUIContainer {
+	bottom: 0;
+}
+#enemyStatsContainer {
+	border: solid white;
+	color: white;
+	margin: 0 40%;
+	top: 37%;
+	width: 20%;
+	height: 12%;
+}
+#enemyContainer {
+	text-align: center;
+}
+#attack {
+	width: 10%;
+	display: block;
+	margin: 10px auto;
+}
+#missles {
+	width: 10%;
+	display: block;
+	margin: 10px auto;
+}
+.heroShip {
+	display: block;
+	margin: 10px auto;
+	max-height: 40%;
+	max-width: 40%;
+}
+.alienShip {
+	margin: 10px;
+	max-height: 40%;
+	max-width: 40%;
+}
+.playerStats {
+	text-align: center;
+	color: rgb(54, 244, 44);
+	bottom: 7%;
+	left: 10%;
+	border: solid white;
+	width: 30%;
+	height: 16%;
+	margin: 0 auto;
+}
+.enemyDeathContainer {
+	text-align: center;
+	border: solid rgb(54, 244, 44);
+	color: rgb(54, 244, 44);
+	margin: 0 40%;
+	top: 20%;
+	width: 20%;
+	height: 12%;
+}
+.gameOverContainer {
+	text-align: center;
+	border: solid white;
+	color: red;
+	margin: 0 40%;
+	bottom: 33%;
+	width: 20%;
+	height: 12%;
+}
