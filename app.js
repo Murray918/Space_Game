@@ -1,12 +1,11 @@
 
+//Alien Stats
 let hull = [3, 4, 5, 6];
 let firepower = [2, 3, 4];
 let accuracy = [0.6, 0.7, 0.8];
 
-let x = Math.floor(Math.random() * 4);
-let y = Math.floor(Math.random() * 3);
 
-
+//Alien constructor
 class Alien {
 	constructor (hull, firepower, accuracy){
 		this.hull = hull
@@ -19,7 +18,8 @@ class Alien {
 };
 
 
-
+// All six Aliens each with random stats
+//Added a random function for each new alien in order to create a new number each time
 let one = new Alien(hull[Math.floor(Math.random() * 4)], firepower[Math.floor(Math.random() * 3)], accuracy[Math.floor(Math.random() * 3)]);
 let two = new Alien(hull[Math.floor(Math.random() * 4)], firepower[Math.floor(Math.random() * 3)], accuracy[Math.floor(Math.random() * 3)]);
 let three = new Alien(hull[Math.floor(Math.random() * 4)], firepower[Math.floor(Math.random() * 3)], accuracy[Math.floor(Math.random() * 3)]);
@@ -28,7 +28,7 @@ let five = new Alien(hull[Math.floor(Math.random() * 4)], firepower[Math.floor(M
 let six = new Alien(hull[Math.floor(Math.random() * 4)], firepower[Math.floor(Math.random() * 3)], accuracy[Math.floor(Math.random() * 3)]);
 
 
-
+//Console
 console.log(one)
 console.log(two)
 console.log(three)
