@@ -24,21 +24,26 @@ class Ship {
 		}
 	}
 }
+let bossPods = []
 let alienBoss = null
 let USS_Assembly = null
 let alienShips = []
 let shipCount = 1
 let chooseShip = 0
+let podCounter = 0
 function populateBattle() {
 	USS_Assembly = new Ship("USS_Assembly", 20, 5, .7, 0, "./images/heroShip.png")
 	alienBoss = new Ship("Alien Boss", 20, 6, .7, 0, "./images/alienShip.jpg")
 	USS_Assembly.shields = Math.floor(Math.random()*6+5)
 	USS_Assembly.missles = 3
-	let randomAliens = 1//Math.floor(Math.random()*4+6)
+	let randomAliens = Math.floor(Math.random()*4+6)
 	for(let i = 0;i<randomAliens;i++) {
-		alienShips[i] = new Ship("Alien Ship "+(i+1), Math.floor(Math.random()*4+3), Math.floor(Math.random()*3+2), Math.round((Math.random()*0.3+0.6)*10)/10, i+1, "./images/alienShip.jpg")
+		alienShips.push(new Ship("Alien Ship "+(i+1), Math.floor(Math.random()*4+3), Math.floor(Math.random()*3+2), Math.round((Math.random()*0.3+0.6)*10)/10, i+1, "./images/alienShip.jpg"))
 	}
-	console.log(alienShips)
+	for(let i = 0;i<4;i++) {
+		bossPods.push(new Ship(`Weapon Pod`, 5, 3, .5, i+1, "./images/alienShip.jpg"))
+	}
+	podCounter = bossPods.length
 	$("#playerUIContainer").prepend(`<img src="${USS_Assembly.img}" class="heroShip"></img>`)
 	for(let ship of alienShips) {
 		$("#enemyContainer").append(`<img src="${ship.img}" class="alienShip alienShip${shipCount}"></img>`)
@@ -70,7 +75,6 @@ function shipBattle(shipChoice) {
 	shipChoice--
 	console.log(alienShips[shipChoice])
 	while(USS_Assembly.stillAlive() && alienShips[shipChoice].stillAlive()) {
-		console.log(shipChoice)
 		let oldPower = USS_Assembly.firepower
 		if(missleChoice && USS_Assembly.missles>0) {
 			USS_Assembly.firepower=10
@@ -106,15 +110,36 @@ function shipBattle(shipChoice) {
 		refreshStats()	
 	}
 	if(shipCount<=0 && !bossEncounter) {
+				shipChoice = 0
 				bossEncounter = true
 				alienShips = []
+				alienShips.push(bossPods[0])
+				alienShips.push(bossPods[1])
+				alienShips.push(bossPods[2])
+				alienShips.push(bossPods[3])
 				alienShips.push(alienBoss)
-				$("#enemyContainer").append(`<img src="./images/alienShip.jpg" class="alienBoss"></img>`)
+				$("#enemyContainer").append(`<img src=${bossPods[0].img} class="alienShip bossPod1"></img>`)
+				$("#enemyContainer").append(`<img src=${bossPods[1].img} class="alienShip bossPod2"></img>`)
+				$("#enemyContainer").append(`<img src=${alienBoss.img} class="alienBoss"></img>`)
+				$("#enemyContainer").append(`<img src=${bossPods[2].img} class="alienShip bossPod3"></img>`)
+				$("#enemyContainer").append(`<img src=${bossPods[3].img} class="alienShip bossPod4"></img>`)
+				for(let i = 0;i<=bossPods.length;i++) {
+					$(`.bossPod${i}`).click(function() {
+						chooseShip = i
+						$(".alienShip").css({"border":"none"})
+						$(this).css({"border":"solid white"})
+					}) 
+				}
+				
 				$(`.alienBoss`).click(function() {
-					chooseShip = 1
-					$(".alienBoss").css({"border":"none"})
-					$(this).css({"border":"solid white"})
-				})
+						if(podCounter<=0) {
+							chooseShip = 5
+							//console.log(shipChoice)
+							//console.log(alienShips[shipChoice])
+							$(".alienBoss").css({"border":"none"})
+							$(this).css({"border":"solid white"})
+						}
+					}) 
 				$(`.alienBoss`).mouseenter(function(){
 				$("#enemyStatsContainer").show().append(`<ul>
 														   <li>${alienBoss.shipName}</li>
@@ -127,14 +152,20 @@ function shipBattle(shipChoice) {
 					$("#enemyStatsContainer").hide().empty()
 				})
 		}
-		if(!alienBoss.stillAlive()) {
-			$('.alienBoss').fadeOut()
-			$(".enemyDeathContainer").show()
-		}
 		if(!USS_Assembly.stillAlive()) {
 			$(".heroShip").fadeOut()
 			$(".gameOverContainer").show()
 		}
+		else if(!alienBoss.stillAlive()) {
+			$('.alienBoss').fadeOut()
+			$(".enemyDeathContainer").show()
+		}
+		else if(bossEncounter && podCounter>=1 && !bossPods[shipChoice].stillAlive()) {
+			podCounter--
+			console.log("dead")
+			$(`.bossPod${chooseShip}`).fadeOut()
+		}
+		
 }
 function refreshStats() {
 	$(".playerStats").empty()
@@ -149,6 +180,7 @@ $(".reset").click(function() {
  	alienShips = []
  	shipCount = 1
  	chooseShip = 0
+ 	bossPods = []
 	$(".heroShip").remove()
 	$(".enemyDeathContainer").hide()
 	$(".gameOverContainer").hide()
