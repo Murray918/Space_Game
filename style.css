@@ -1,0 +1,65 @@
+.enemyShipContainer{
+	width: 100%;
+	height: 15%;
+	position: fixed;
+	text-align: center;
+}
+
+body{
+	margin: 0;
+	background-color: grey;
+}
+
+.alienShips{
+	max-height: 50%;
+	max-width: 50%;
+ 	margin: 50px;
+}
+
+.heroShipContainer{
+	width: 100%;
+	height: 25%;
+	position: fixed;
+	text-align: center;
+	bottom: 35px;
+}
+
+.heroShip{
+	max-height: 80%;
+	max-width: 80%;
+ 	margin-bottom: 60px;
+
+}
+
+.endScreen{
+	width: 20%;
+	height: 8%;
+	position: fixed;
+	text-align: center;
+	bottom: 50%;
+	margin: 0 40%;
+	font-size: 45px;
+	color: red;
+	background-color: black;
+	border: solid red;
+}
+
+.winScreen{
+	width: 20%;
+	height: 15%;
+	position: fixed;
+	text-align: center;
+	bottom: 50%;
+	margin: 0 40%;
+	font-size: 45px;
+	color: rgb(137, 244, 66);
+	background-color: white;
+	border: solid rgb(137, 244, 66);
+}
+
+button{
+	display: block;
+	margin: 10px auto;
+
+}
+
