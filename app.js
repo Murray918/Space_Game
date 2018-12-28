@@ -1,4 +1,12 @@
 
+//Millenium Falcon (my Ship)
+let falcon = {
+	hull: 20,
+	firepower: 5,
+	accuracy: 0.7
+};
+
+
 //Alien Stats
 let hull = [3, 4, 5, 6];
 let firepower = [2, 3, 4];
@@ -29,9 +37,24 @@ let six = new Alien(hull[Math.floor(Math.random() * 4)], firepower[Math.floor(Ma
 
 
 //Console
+/*
 console.log(one)
 console.log(two)
 console.log(three)
 console.log(four)
 console.log(five)
 console.log(six)
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
