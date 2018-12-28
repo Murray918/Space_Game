@@ -37,18 +37,22 @@ let six = new Alien(hull[Math.floor(Math.random() * 4)], firepower[Math.floor(Ma
 
 
 //Console
-/*
+
 console.log(one)
 console.log(two)
 console.log(three)
 console.log(four)
 console.log(five)
 console.log(six)
-*/
 
 
+//while (one.hull>0) {
+	if(Math.random()<0.7){
+		one.hull -= falcon.firepower
+	}
+//};
 
-
+console.log (one)
 
 
 
