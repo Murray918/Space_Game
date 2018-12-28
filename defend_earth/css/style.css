@@ -1,3 +1,133 @@
 body {
-    text-align: center;
+  background: url(../pictures/space_background.jpg) no-repeat center center;
+  background-size: cover;
+  height: 90vh;
+  /* width: 900px; */ 
+}
+h1 {
+	text-align: center;
+	color: blue;
+}
+a {
+	text-decoration: none;
+}
+.alien_pics {
+  display: table;
+  width: 100%;
+  margin: 0px auto;
+}
+.alien_pics span {
+  display: table-cell;
+  text-align: center;
+  width: 16%; 
+  color: white; 
+  
+}
+.alien_pics img {
+  width: 100%;
+  max-width: 150px;
+  max-height: 175px;
+}
+.alien1 {
+  padding: 1px 1px 1px 1px;
+  background: white;
+}
+.alien2 {
+  padding: 1px 1px 1px 1px;
+  background: white;
+}
+.alien3 {
+  padding: 1px 1px 1px 1px;
+  background: white;
+}
+.alien4 {
+  padding: 1px 1px 1px 1px;
+  background: white;
+}
+.alien5 {
+  padding: 1px 1px 1px 1px;
+  background: white;
+}
+.alien6 {
+  padding: 1px 1px 1px 1px;
+  background: white;
+}
+.defender_pic {
+  position: absolute;
+   top: 55%;
+   
+  display: table;
+  width: 100%;
+  margin: 0px auto;
+}
+.defender_pic span {
+  display: table-cell;
+  text-align: center;
+  width: 16%;
+  color: white; 
+}
+.defender_pic img {
+  width: 100%;
+  max-width: 200px;
+}
+.defender {
+  padding: 20px 20px 20px 20px;
+  background: green;
+}
+
+.flee {
+  background-color: #f4511e;
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-align: center;
+  font-size: 16px;
+  margin: 4px 2px;
+  opacity: 0.6;
+  transition: 0.3s;
+  display: inline-block;
+  text-decoration: none;
+  cursor: pointer;
+  position:absolute;
+  top:46%;
+  left:40%;
+}
+.flee:hover {opacity: 1}
+.flee:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+.fight {
+  background-color: #11FF1e;
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-align: center;
+  font-size: 16px;
+  margin: 4px 2px;
+  opacity: 0.6;
+  transition: 0.3s;
+  display: inline-block;
+  text-decoration: none;
+  cursor: pointer;
+  position:absolute;
+  top:46%;
+  left:55%;
+}
+.fight:hover {opacity: 1}
+.fight:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #800000;
+  color: white;
+  text-align: center;
 }
