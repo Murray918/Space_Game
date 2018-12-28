@@ -60,8 +60,17 @@ class action extends shipStats{
 		let x = 0;
 		let moo = "";
 		let f="";
+//-------------------------------------------------------------------------------
+//Giant while loop to simulate the battle
+//-------------------------------------------------------------------------------
 		while (attacker.hull > 0 && defender.hull > 0) {
+//-------------------------------------------------------------------------------
+//Calculate the defender's accuracy this turn
+//-------------------------------------------------------------------------------
 			x = Math.random();
+//-------------------------------------------------------------------------------
+//Defender scored a hit
+//-------------------------------------------------------------------------------
 			if (x <= defender.accruacy) {
 				attacker.hull = attacker.hull - defender.firepower;
 				//console.log("." + attacker.name);
@@ -79,6 +88,9 @@ class action extends shipStats{
 			//do stuff here
 			console.log("attacker hull = " + attacker.hull);
 
+//-------------------------------------------------------------------------------
+//Attacker Turn assuming it survived
+//-------------------------------------------------------------------------------
 			if (attacker.hull > 0) 
 			{
 				x = Math.random();
@@ -97,8 +109,13 @@ class action extends shipStats{
 			}
 			else 
 			{
+//-------------------------------------------------------------------------------
+//Attacker Blew up
+//-------------------------------------------------------------------------------
 				//console.log("attack phase " + i + " over.  Attacker Loses hull = " + attacker.hull + " Defender Wins hull = " + defender.hull);
 				$( ".footer" ).text("Phase over. " + attacker.name + " Loses -- Defender Wins");
+				$( "img" ).filter("." + attacker.name).hide(slow);
+
 				break;
 			}
 			if (defender.hull <= 0) 
@@ -113,7 +130,7 @@ class action extends shipStats{
 }
 
 //-------------------------------------------------------------------------------
-//Create a random function that will return a value between the min and max
+//Create a function that will return a random value between the min and max
 //-------------------------------------------------------------------------------
 function random (min,max) {
 	let math = 0;
@@ -129,15 +146,21 @@ function random (min,max) {
 }
 
 //-------------------------------------------------------------------------------
-//Create the Defender and alien attackers
+//Create the Defender
 //-------------------------------------------------------------------------------
 let earthDefender = new shipStats("defender");
 earthDefender.setStats([20,5,0.7]);
 $( "h5" ).eq(6).text("Hull = " + earthDefender.hull);
 
+//-------------------------------------------------------------------------------
 //Place the 6 alien attackers into an array
+//-------------------------------------------------------------------------------
 let aliens = [new shipStats("alien1"), new shipStats("alien2"),new shipStats("alien3"), new shipStats("alien4"),new shipStats("alien5"),new shipStats("alien6")];
 let string = "";
+
+//-------------------------------------------------------------------------------
+//Assign stats for the 6 aliens
+//-------------------------------------------------------------------------------
 for (let i = 0; i < 6; ++i) {
 	aliens[i].setStats([random(3,6),random(2,4),random(0.6,0.8)]);
 	$( "h5" ).eq(i).text("Hull = " + aliens[i].hull);
@@ -159,7 +182,7 @@ let justObj = "";
 let x = 0;
 $( ".fight" ).click(function() {
 //-------------------------------------------------------------------------------
-//pick an alien to attack and splice it from the global aliens array
+//Random alien is chosen to attack and splice it from the global aliens array
 //-------------------------------------------------------------------------------
 	if (aliens.length > 0) {
 		console.log(aliens.length-1);
@@ -176,6 +199,15 @@ $( ".fight" ).click(function() {
 	}
 	return 0;
 });
+
+$( ".flee" ).click(function() {
+//-------------------------------------------------------------------------------
+//Fleeing
+//-------------------------------------------------------------------------------
+	
+	return 0;
+});
+
 
 
 
