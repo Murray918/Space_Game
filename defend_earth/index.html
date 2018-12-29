@@ -20,36 +20,42 @@
 <body>
 <h1>Defend Earth Game</h1>
 
+<h2 class="story">Earth is peacefully defended by </h2>
+
 <div class="alien_pics">
 <span><img class="alien1" src="pictures/alien.jpg"
-     alt="Alien 1" title="Alien #1"><h5 class="aalien1">Hull = </h5>
+     alt="Alien 1" title="Alien #1" style="display:none"><h5 class="aalien1" style="display:none">Hull = </h5>
  </span>
 <span><img class="alien2" src="pictures/alien2.png"
-     alt="Alien 2" title="Alien #2"><h5 class="aalien2">Hull = </h5>
+     alt="Alien 2" title="Alien #2" style="display:none"><h5 class="aalien2" style="display:none">Hull = </h5>
  </span>
 <span><img class="alien3" src="pictures/alien3.jpg"
-     alt="Alien 3" title="Alien #3"><h5 class="aalien3">Hull = </h5>
+     alt="Alien 3" title="Alien #3" style="display:none"><h5 class="aalien3" style="display:none">Hull = </h5>
  </span>
 <span><img class="alien4" src="pictures/alien4.jpg"
-     alt="Alien 4" title="Alien #4"><h5 class="aalien4">Hull = </h5>
+     alt="Alien 4" title="Alien #4" style="display:none"><h5 class="aalien4" style="display:none">Hull = </h5>
  </span>
 <span><img class="alien5" src="pictures/alien5.jpg"
-     alt="Alien 4" title="Alien #5"><h5 class="aalien5">Hull = </h5>
+     alt="Alien 4" title="Alien #5" style="display:none"><h5 class="aalien5" style="display:none">Hull = </h5>
  </span>
 <span><img class="alien6" src="pictures/alien6.jpg"
-     alt="Alien 4" title="Alien #6"><h5 class="aalien6">Hull = </h5>
+     alt="Alien 4" title="Alien #6" style="display:none"><h5 class="aalien6" style="display:none">Hull = </h5>
  </span>
  </div>
 
 <div class="buttons">
-	<button type="button" class="flee" title="You may want to rethink this!!!">FLEE!!!</button>
-	<button type="button" class="fight" title="Go show those Aliens who is boss!!!">FIGHT</button>
+	<button type="button" class="flee" title="You may want to rethink this!!!" disabled>FLEE!!!</button>
+	<button type="button" class="fight" title="Go show those Aliens who is boss!!!" disabled>FIGHT</button>
 	<label class="startHere"><--- Press FIGHT to Defend Earth from the Aliens!!!</label>
 	<label class="chose"><-- Push Flee or Fight --></label>
 	<h2 class="whoWins">Defender Wins</h2>
 </div>
 
-
+<button type="button" class="restart" onClick="window.location.reload()">restart</button>
+<!--<textarea rows="20" cols="50" readonly="true" class="battleText">
+Fight results go here
+</textarea>
+-->
 <div class="defender_pic">
 <span><img class="defender" src="pictures/defender4.jpg"
      alt="Defender 1"
@@ -63,8 +69,11 @@
 <div id="container"></div>
 <script src="./js/app.js"></script>
 </body>
+
+<!--
 <footer class="footer">
   <label class="statusLabel">Status of the Fight</label>
   <button type="button" class="restart" onClick="window.location.reload()">restart</button>
 </footer>
 </html>
+-->

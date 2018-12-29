@@ -4,7 +4,7 @@ body {
   height: 90vh;
   /* width: 900px; */ 
 }
-h1 {
+h1, h2 {
 	text-align: center;
 	color: blue;
 }
@@ -147,6 +147,9 @@ a {
   display: inline-block;
   text-decoration: none;
   cursor: pointer;
+  position:absolute;
+  	top:2%;
+  	left:2%;
 }
 .restart:hover {opacity: 1}
 .restart:active {
@@ -175,3 +178,14 @@ a {
   	left:41%;
   	color: #FFFFFF;
 }
+
+/*
+.battleText {
+	position:absolute;
+  	top:60%;
+  	left:80%;
+  	color: #FFFFFF;
+  	opacity: 0.3;
+  	background-color: #000000;
+}
+*/
