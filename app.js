@@ -15,7 +15,7 @@ let accuracy = [0.6, 0.7, 0.8];
 
 //Alien constructor
 class Alien {
-	constructor (hull, firepower, accuracy){
+	constructor (hull, firepower, accuracy) {
 		this.hull = hull
 		this.firepower = firepower
 		this.accuracy = accuracy
