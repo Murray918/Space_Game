@@ -151,6 +151,7 @@ class action extends shipStats{
 			$( "img" ).filter("." + defender.iName).toggle( "explode" );
 			f = ".d" + defender.iName;
 			$( "h5" ).filter(f).toggle( "explode" );
+			return 0;
 		} 
 
 		if ( (aliens.length === 0) ) {
