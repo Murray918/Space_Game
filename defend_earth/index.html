@@ -4,11 +4,16 @@
 	<title>Defend Earth</title>
 	<link rel="shortcut icon" rel="shortcut icon" href="harry.ico" type="image/x-icon"/>
     <link rel="shortcut icon" rel="icon" href="harry.ico" type="image/ico"/>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 	<meta charset="UTF-8">
 	<link href="./css/style.css" rel="stylesheet" type="text/css">
 	<script
   	src="https://code.jquery.com/jquery-3.3.1.min.js"
   	integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  	crossorigin="anonymous"></script>
+  	<script
+  	src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+  	integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
   	crossorigin="anonymous"></script>
   	
 </head>
@@ -17,28 +22,31 @@
 
 <div class="alien_pics">
 <span><img class="alien1" src="pictures/alien.jpg"
-     alt="Alien 1"><h5 class="aalien1">Hull = </h5>
+     alt="Alien 1" title="Alien #1"><h5 class="aalien1">Hull = </h5>
  </span>
 <span><img class="alien2" src="pictures/alien2.png"
-     alt="Alien 2"><h5 class="aalien2">Hull = </h5>
+     alt="Alien 2" title="Alien #2"><h5 class="aalien2">Hull = </h5>
  </span>
 <span><img class="alien3" src="pictures/alien3.jpg"
-     alt="Alien 3"><h5 class="aalien3">Hull = </h5>
+     alt="Alien 3" title="Alien #3"><h5 class="aalien3">Hull = </h5>
  </span>
 <span><img class="alien4" src="pictures/alien4.jpg"
-     alt="Alien 4"><h5 class="aalien4">Hull = </h5>
+     alt="Alien 4" title="Alien #4"><h5 class="aalien4">Hull = </h5>
  </span>
 <span><img class="alien5" src="pictures/alien5.jpg"
-     alt="Alien 4"><h5 class="aalien5">Hull = </h5>
+     alt="Alien 4" title="Alien #5"><h5 class="aalien5">Hull = </h5>
  </span>
 <span><img class="alien6" src="pictures/alien6.jpg"
-     alt="Alien 4"><h5 class="aalien6">Hull = </h5>
+     alt="Alien 4" title="Alien #6"><h5 class="aalien6">Hull = </h5>
  </span>
  </div>
 
 <div class="buttons">
-	<button type="button" class="flee">FLEE!!!</button>
-	<button type="button" class="fight">FIGHT</button>
+	<button type="button" class="flee" title="You may want to rethink this!!!">FLEE!!!</button>
+	<button type="button" class="fight" title="Go show those Aliens who is boss!!!">FIGHT</button>
+	<label class="startHere"><--- Press FIGHT to Defend Earth from the Aliens!!!</label>
+	<label class="chose"><-- Push Flee or Fight --></label>
+	<h2 class="whoWins">Defender Wins</h2>
 </div>
 
 
@@ -46,7 +54,8 @@
 <span><img class="defender" src="pictures/defender4.jpg"
      alt="Defender 1"
      width="200"
-     height="230">
+     height="230"
+     title="Try not to get blown up!!!">
      <h5 class="ddefender">Hull = </h5>
  </span>
 </div>
@@ -55,6 +64,7 @@
 <script src="./js/app.js"></script>
 </body>
 <footer class="footer">
-  <p>Status of the Fight</p>
+  <label class="statusLabel">Status of the Fight</label>
+  <button type="button" class="restart" onClick="window.location.reload()">restart</button>
 </footer>
 </html>

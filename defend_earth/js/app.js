@@ -79,7 +79,7 @@ class action extends shipStats{
 				moo = $( "h5" ).filter(f).text("Hull = " + attacker.hull);
 				//string = ".alien" + (i+1);
 				$( "img" ).filter("." + attacker.name).css("padding", attacker.hull + "px");
-				//console.log(moo);
+				console.log(moo);
 			}
 			else
 			{
@@ -110,21 +110,33 @@ class action extends shipStats{
 			else 
 			{
 //-------------------------------------------------------------------------------
-//Attacker Blew up
+//Attacker Blew up.  Slowly hide the attacker from battle as it blew up
 //-------------------------------------------------------------------------------
 				//console.log("attack phase " + i + " over.  Attacker Loses hull = " + attacker.hull + " Defender Wins hull = " + defender.hull);
-				$( ".footer" ).text("Phase over. " + attacker.name + " Loses -- Defender Wins");
-				$( "img" ).filter("." + attacker.name).hide(slow);
-
+				$( ".statusLabel" ).text("Phase over. " + attacker.name + " Loses -- Defender Wins");
+//-------------------------------------------------------------------------------
+//Hide the image of the ship then hide the text with hull.  This does the explode effect.
+//-------------------------------------------------------------------------------
+				$( "img" ).filter("." + attacker.name).toggle( "explode" );
+				f = ".a" + attacker.name;
+				$( "h5" ).filter(f).toggle( "explode" );
 				break;
 			}
 			if (defender.hull <= 0) 
 			{
-				$( ".footer" ).text("Phase over.   " + attacker.name + " Wins -- Defender Loses");
+				$( ".statusLabel" ).text("Phase over.   " + attacker.name + " Wins -- Defender Loses");
+//-------------------------------------------------------------------------------
+//Hide the image of the ship then hide the text with hull.  This does the explode effect.
+//-------------------------------------------------------------------------------
+				$( "img" ).filter("." + defender.name).toggle( "explode" );
+				f = ".d" + defender.name;
+				$( "h5" ).filter(f).toggle( "explode" );
+				
 			}
 			//console.log("attack phase " + i + " over.  Attacker hull = " + attacker.hull + " Defender hull = " + defender.hull);
 			i++;
 		}
+		choseInterval = setInterval(blink_text_chose, 1000);
 		return 0;
 	}
 }
@@ -144,6 +156,35 @@ function random (min,max) {
 	}
 	return math;
 }
+
+//-------------------------------------------------------------------------------
+//Tooltip function
+//-------------------------------------------------------------------------------
+$(function() {
+    $( document ).tooltip();
+});
+
+//-------------------------------------------------------------------------------
+//Flashing Text at startup
+//-------------------------------------------------------------------------------
+let interval = setInterval(blink_text, 1000);
+function blink_text() {
+    $('.startHere').fadeOut(500);
+    $('.startHere').fadeIn(500);
+}
+
+//-------------------------------------------------------------------------------
+//Flashing Text at startup
+//-------------------------------------------------------------------------------
+let choseInterval = 0;
+$('.chose').hide();
+function blink_text_chose() {
+    $('.chose').fadeOut(500);
+    $('.chose').fadeIn(500);
+}
+
+
+
 
 //-------------------------------------------------------------------------------
 //Create the Defender
@@ -176,15 +217,20 @@ let globalAction = new action("who");
 //console.log("Hull = " + earthDefender.currentHull());
 //console.log("Hull = " + attacker.currentHull());
 
-
+//-------------------------------------------------------------------------------
+//Fight Click Function
+//-------------------------------------------------------------------------------
 let attacker = "";
 let justObj = "";
 let x = 0;
+$( ".whoWins" ).hide();
 $( ".fight" ).click(function() {
+	clearInterval(interval);
+	$( ".startHere" ).remove();
 //-------------------------------------------------------------------------------
 //Random alien is chosen to attack and splice it from the global aliens array
 //-------------------------------------------------------------------------------
-	if (aliens.length > 0) {
+	if ( (aliens.length > 0) && (earthDefender.currentHull() > 0) ) {
 		console.log(aliens.length-1);
 		x = random(0,(aliens.length - 1));
 		attacker = aliens.splice(x,1);
@@ -196,7 +242,24 @@ $( ".fight" ).click(function() {
 //Attack 1st alien ship
 //-------------------------------------------------------------------------------
 		globalAction.attack(earthDefender,attacker);
+	} 
+
+	if ( (aliens.length === 0) ) {
+//-------------------------------------------------------------------------------
+//Defender wins
+//-------------------------------------------------------------------------------
+		clearInterval(choseInterval);
+		$( ".chose" ).remove();
+		$( ".whoWins" ).text("Defender Wins.  Earth is Saved!!!").show();
+	} else if (earthDefender.currentHull() <= 0) {
+//-------------------------------------------------------------------------------
+//Aliens win.  Earth is dddddddddooooooooommmmmmmmmeeeeeeddddd!!!!!!!!
+//-------------------------------------------------------------------------------
+		clearInterval(choseInterval);
+		$( ".chose" ).remove();
+		$( ".whoWins" ).text("Aliens Win.  Earth is Doomed!!!").show();
 	}
+	
 	return 0;
 });
 
@@ -204,7 +267,22 @@ $( ".flee" ).click(function() {
 //-------------------------------------------------------------------------------
 //Fleeing
 //-------------------------------------------------------------------------------
-	
+	clearInterval(interval);
+	$( ".startHere" ).remove();
+
+	clearInterval(choseInterval);
+	$( ".chose" ).remove();
+	$( "img" ).filter("." + earthDefender.name).toggle( "pulsate" );
+	f = ".d" + earthDefender.name;
+	$( "h5" ).filter(f).toggle( "pulsate" );
+	$( ".whoWins" ).text("Defender Retreats.  Earth is Doomed!!!").show();
+	earthDefender.setStats([0,0,0]);
+//-------------------------------------------------------------------------------
+//Disable the buttons
+//-------------------------------------------------------------------------------
+
+
+
 	return 0;
 });
 
@@ -213,10 +291,7 @@ $( ".flee" ).click(function() {
 
 
 
-
-
-
-
+//$("#someElement").fadeIn(100).fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100);
 
 
 /*

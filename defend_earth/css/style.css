@@ -130,4 +130,48 @@ a {
   background-color: #800000;
   color: white;
   text-align: center;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.restart {
+  background-color: #111199;
+  border: none;
+  color: white;
+  padding: 5px 10px;
+  text-align: center;
+  font-size: 16px;
+  margin: 4px 2px;
+  opacity: 0.6;
+  transition: 0.3s;
+  display: inline-block;
+  text-decoration: none;
+  cursor: pointer;
+}
+.restart:hover {opacity: 1}
+.restart:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+.statusLabel {
+	
+}
+.startHere {
+	position:absolute;
+  	top:48%;
+  	left:62%;
+  	color: #FFFFFF;
+}
+.chose {
+	position:absolute;
+  	top:48%;
+  	left:46%;
+  	color: #FFFFFF;
+}
+.whoWins {
+	position:absolute;
+  	top:35%;
+  	left:41%;
+  	color: #FFFFFF;
 }
