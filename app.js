@@ -6,7 +6,6 @@ let falcon = {
 	accuracy: 0.7
 };
 
-
 //Alien Stats
 let hull = [3, 4, 5, 6];
 let firepower = [2, 3, 4];
@@ -38,57 +37,64 @@ let six = new Alien(hull[Math.floor(Math.random() * 4)], firepower[Math.floor(Ma
 
 
 //Battle Alien One
-
+while(falcon.hull>0 && one.hll>0) {
 	if (Math.random()<=falcon.accuracy) {
 		one.hull -= falcon.firepower
 	}
 	if (one.hull>0 && Math.random()<=one.accuracy) {
 		falcon.hull -= one.firepower
 	}
+};
 
 //Battle Alien Two
+while(falcon.hull>0 && two.hull>0) {
 	if (Math.random()<=falcon.accuracy) {
 		two.hull -= falcon.firepower
 	}
 	if (two.hull>0 && Math.random()<=two.accuracy) {
 		falcon.hull -= two.firepower
 	}
+};
 
 //Battle Alien Three
+while(falcon.hull>0 && three.hull>0) {
 	if (Math.random()<=falcon.accuracy) {
 		three.hull -= falcon.firepower
 	}
 	if (one.hull>0 && Math.random()<=three.accuracy) {
 		falcon.hull -= three.firepower
 	}
-
+};
 
 //Battle Alien Four
+while(falcon.hull>0 && four.hull>0) {
 	if (Math.random()<=falcon.accuracy) {
 		four.hull -= falcon.firepower
 	}
 	if (one.hull>0 && Math.random()<=four.accuracy) {
 		falcon.hull -= four.firepower
 	}
-
+};
 
 //Battle Alien Five
+while(falcon.hull>0 && five.hull>0) {
 	if (Math.random()<=falcon.accuracy) {
 		five.hull -= falcon.firepower
 	}
 	if (one.hull>0 && Math.random()<=five.accuracy) {
 		falcon.hull -= five.firepower
 	}
-
+};
 
 //Battle Alien Six
+while(falcon.hull>0 && six.hull>0) {
 	if (Math.random()<=falcon.accuracy) {
 		six.hull -= falcon.firepower
 	}
 	if (one.hull>0 && Math.random()<=six.accuracy) {
 		falcon.hull -= six.firepower
 	}
-
+};
 
 //Console
 console.log(one)
