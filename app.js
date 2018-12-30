@@ -46,12 +46,12 @@ while(falcon.hull>0 && one.hull>0) {
 		falcon.hull -= one.firepower
 	}
 };
-console.log(one);
-console.log (falcon)
+console.log("Enemy ship:",one);
+console.log ("Millenium Falcon:",falcon)
 
 let oneP = prompt("keep fighting?","ok");
 	if(oneP==="ok") {
-	console.log("Next Fight!")
+	console.log("***********************************Next Fight!*********************************************")
 }
 	else {alert("Thanks For Playing!")};
 
@@ -69,12 +69,12 @@ while(falcon.hull>0 && two.hull>0) {
 		falcon.hull -= two.firepower
 	}
 };
-console.log(two);
-console.log (falcon);
+console.log("Enemy ship:",two);
+console.log ("Millenium Falcon:",falcon);
 
 let twoP = prompt("keep fighting?","ok");
 	if(twoP==="ok") {
-	console.log("Next Fight!")
+	console.log("***********************************Next Fight!*********************************************")
 }
 	else {alert("Thanks For Playing!")};
 
@@ -93,12 +93,12 @@ while(falcon.hull>0 && three.hull>0) {
 		falcon.hull -= three.firepower
 	}
 };
-console.log(three);
-console.log (falcon)
+console.log("Enemy Ship:",three);
+console.log ("Millenium Falcon",falcon)
 
 let threeP = prompt("keep fighting?","ok");
 	if(threeP==="ok") {
-	console.log("Next Fight!")
+	console.log("***********************************Next Fight!*********************************************")
 }
 	else {alert("Thanks For Playing!")};
 
@@ -117,12 +117,12 @@ while(falcon.hull>0 && four.hull>0) {
 		falcon.hull -= four.firepower
 	}
 };
-console.log(four);
-console.log (falcon)
+console.log("Enemy Ship:",four);
+console.log ("Millenium Falcon:",falcon)
 
 let fourP = prompt("keep fighting?","ok");
 	if(fourP==="ok") {
-	console.log("Next Fight!")
+	console.log("***********************************Next Fight!*********************************************")
 }
 	else {alert("Thanks For Playing!")};
 
@@ -141,12 +141,12 @@ while(falcon.hull>0 && five.hull>0) {
 		falcon.hull -= five.firepower
 	}
 };
-console.log(five);
-console.log (falcon)
+console.log("Enemy Ship:",five);
+console.log ("Millenium Falcon:",falcon)
 
 let fiveP = prompt("keep fighting?","ok");
 	if(fiveP==="ok") {
-	console.log("Next Fight!")
+	console.log("***********************************Next Fight!*********************************************")
 }
 	else {alert("Thanks For Playing!")};
 
@@ -165,8 +165,8 @@ while(falcon.hull>0 && six.hull>0) {
 		falcon.hull -= six.firepower
 	}
 };
-console.log(six);
-console.log (falcon)
+console.log("Enemy Ship:",six);
+console.log ("Millenium Falcon:",falcon)
 
 if(falcon.hull>0) {
 	alert("Congratulations!, You Won!")
