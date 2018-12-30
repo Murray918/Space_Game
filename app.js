@@ -37,7 +37,8 @@ let six = new Alien(hull[Math.floor(Math.random() * 4)], firepower[Math.floor(Ma
 
 
 //Battle Alien One
-while(falcon.hull>0 && one.hll>0) {
+
+while(falcon.hull>0 && one.hull>0) {
 	if (Math.random()<=falcon.accuracy) {
 		one.hull -= falcon.firepower
 	}
@@ -45,8 +46,21 @@ while(falcon.hull>0 && one.hll>0) {
 		falcon.hull -= one.firepower
 	}
 };
+console.log(one);
+console.log (falcon)
+
+let oneP = prompt("keep fighting?","ok");
+	if(oneP==="ok") {
+	console.log("Next Fight!")
+}
+	else {alert("Thanks For Playing!")};
+
+
+
+
 
 //Battle Alien Two
+
 while(falcon.hull>0 && two.hull>0) {
 	if (Math.random()<=falcon.accuracy) {
 		two.hull -= falcon.firepower
@@ -55,8 +69,22 @@ while(falcon.hull>0 && two.hull>0) {
 		falcon.hull -= two.firepower
 	}
 };
+console.log(two);
+console.log (falcon);
+
+let twoP = prompt("keep fighting?","ok");
+	if(twoP==="ok") {
+	console.log("Next Fight!")
+}
+	else {alert("Thanks For Playing!")};
+
+
+
+
+
 
 //Battle Alien Three
+
 while(falcon.hull>0 && three.hull>0) {
 	if (Math.random()<=falcon.accuracy) {
 		three.hull -= falcon.firepower
@@ -65,8 +93,22 @@ while(falcon.hull>0 && three.hull>0) {
 		falcon.hull -= three.firepower
 	}
 };
+console.log(three);
+console.log (falcon)
+
+let threeP = prompt("keep fighting?","ok");
+	if(threeP==="ok") {
+	console.log("Next Fight!")
+}
+	else {alert("Thanks For Playing!")};
+
+
+
+
+
 
 //Battle Alien Four
+
 while(falcon.hull>0 && four.hull>0) {
 	if (Math.random()<=falcon.accuracy) {
 		four.hull -= falcon.firepower
@@ -75,8 +117,22 @@ while(falcon.hull>0 && four.hull>0) {
 		falcon.hull -= four.firepower
 	}
 };
+console.log(four);
+console.log (falcon)
+
+let fourP = prompt("keep fighting?","ok");
+	if(fourP==="ok") {
+	console.log("Next Fight!")
+}
+	else {alert("Thanks For Playing!")};
+
+
+
+
+
 
 //Battle Alien Five
+
 while(falcon.hull>0 && five.hull>0) {
 	if (Math.random()<=falcon.accuracy) {
 		five.hull -= falcon.firepower
@@ -85,8 +141,22 @@ while(falcon.hull>0 && five.hull>0) {
 		falcon.hull -= five.firepower
 	}
 };
+console.log(five);
+console.log (falcon)
+
+let fiveP = prompt("keep fighting?","ok");
+	if(fiveP==="ok") {
+	console.log("Next Fight!")
+}
+	else {alert("Thanks For Playing!")};
+
+
+
+
+
 
 //Battle Alien Six
+
 while(falcon.hull>0 && six.hull>0) {
 	if (Math.random()<=falcon.accuracy) {
 		six.hull -= falcon.firepower
@@ -95,15 +165,15 @@ while(falcon.hull>0 && six.hull>0) {
 		falcon.hull -= six.firepower
 	}
 };
-
-//Console
-console.log(one)
-console.log(two)
-console.log(three)
-console.log(four)
-console.log(five)
-console.log(six)
+console.log(six);
 console.log (falcon)
+
+if(falcon.hull>0) {
+	alert("Congratulations!, You Won!")
+}
+else {
+	alert("You Died.")
+}
 
 
 
