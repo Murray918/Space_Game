@@ -3,7 +3,7 @@ function random(min, max) {
 }
 
 
-
+let $status = $('#status')
 
 
 
@@ -61,10 +61,10 @@ let theAliensCome = function() {
 let earthAttack = prompt('Do you wish to do battle? \n if so type yes')
 if (earthAttack === 'yes') {
     theAliensCome()
-    console.log('Earth is under attack its your move, \n There are 6 alien ships you have the first attack')
+    $status.append('<li>Earth is under attack its your move,</li><li> There are 6 alien ships you have the first attack</li>')
 } else if (earthAttack != 'yes') {
-    console.log('the earth is destroyed')
-    $('html').hide()
+    $('body').hide()
+    $('html').append('<body><h1>the earth is destroyed</h1><body>')
 } 
 
 
@@ -127,7 +127,7 @@ let gameOver = function() {
 }
 
 
-let $status = $('#status')
+
 
 $status.after("<button id='attack' style='height:100px; width: 100px;'>Attack</button> <button id='retreat' style='height:100px; width: 100px;'>Retreat</button>")
 

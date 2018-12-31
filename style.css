@@ -3,18 +3,16 @@ p {
 	color:white;
 	width:500px;
 }
-#status{
+#console{
 	background-color: grey;
-	position: relative;
-	float:right;
+	position: absolute;
+	top:50px;
 	right:50px;
-	list-style: none;
 	font-size:20px;
+	padding:20px;
 	
 	
 }
-button{
-	position:relative;
-	float:right;
-	right:100px;
+#status{
+	list-style: none;
 }
