@@ -59,7 +59,7 @@ let theAliensCome = function() {
 
 
 let earthAttack = prompt('Do you wish to do battle? \n if so type yes')
-if (earthAttack.toLowerCase() === 'yes') {
+if (earthAttack === 'yes') {
     theAliensCome()
     console.log('Earth is under attack its your move, \n There are 6 alien ships you have the first attack')
 } else if (earthAttack != 'yes') {
@@ -73,17 +73,18 @@ if (earthAttack.toLowerCase() === 'yes') {
 
 
 
+
 let attackPhaseHuman = function() {
     if (alienFleet.length != 0) {
         if (earthShip.accuracy() === 'hit') {
             alienFleet[0].hull -= earthShip.firePower
-            console.log('you hit')
+            console.log('you hit alien hull is ' + alienFleet[0].hull)
             if (alienFleet[0].hull <= 0) { //if you kill the ship you get to attack first again
                 console.log('defeated alien')
                 alienFleet.shift()
                 console.log(alienFleet.length + ' remaining ships')
-                let nextRound = prompt('Do you wish to continue?') //currently to show win screen you need to attack when there is no more alien ships left
-                if (nextRound.toLowerCase() != 'yes') {
+                let nextRound = prompt('Excellent work! \n current alien ship destroyed \n Do you wish to continue?') //currently to show win screen you need to attack when there is no more alien ships left
+                if (nextRound != 'yes') {
                     gameOver()
                 }
             } else { //aliens attack at the end of each phase
@@ -92,7 +93,7 @@ let attackPhaseHuman = function() {
             }
 
         } else { //aliens attack at the end of each phase
-            console.log('miss')
+            console.log('Your lasers have missed')
             attackPhaseAlien()
         }
     } else {
@@ -112,6 +113,9 @@ let attackPhaseAlien = function() {
     }
 }
 
+
+
+
 let gameOver = function() {
     if (alienFleet.length === 0) {
         $('body').hide()
@@ -123,9 +127,9 @@ let gameOver = function() {
 }
 
 
-let $console = $('.console')
+let $status = $('#status')
 
-$console.append("<button id='attack'>Attack</button> <button id='retreat'>Retreat</button>")
+$status.after("<button id='attack' style='height:100px; width: 100px;'>Attack</button> <button id='retreat' style='height:100px; width: 100px;'>Retreat</button>")
 
 $('#attack').click(attackPhaseHuman)
 $('#retreat').click(gameOver)
