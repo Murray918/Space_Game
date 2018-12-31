@@ -14,9 +14,9 @@ let earthShip = {
     accuracy: function() {
         let hit = Math.random()
         if (hit <= .7) {
-            console.log('hit')
+            return 'hit'
         } else {
-            console.log('miss')
+            return 'miss'
         }
     }
 
@@ -46,7 +46,7 @@ class alienShip {
 }
 
 
-
+let turn = []
 let alienFleet = []
 let theAliensCome = function() {
     alienFleet.push(new alienShip)
@@ -67,10 +67,45 @@ if(earthAttack.toLowerCase() === 'yes'){
 	console.log('the earth is destroyed')
 }
 
+
+let attackPhaseHuman = function(){
+    if(earthShip.accuracy() === 'hit'){
+        alienFleet[0].hull -= earthShip.firePower
+        console.log('you hit')
+        if(alienFleet[0].hull <=0){
+            console.log('defeated alien')
+            alienFleet.shift()
+            console.log(alienFleet.length + 'remaining ships')
+            break
+        }
+    } else{
+        console.log('miss')
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 let $console = $('.console')
 
 $console.append("<button id='attack'>Attack</button> <button id='retreat'>Retreat</button>")
 
-$console.click(earthShip.accuracy)
+$console.click(attackPhaseHuman)
+
+
 
 
