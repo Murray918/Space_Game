@@ -63,8 +63,9 @@ let earthAttack = prompt('Do you wish to do battle? \n if so type yes')
 if(earthAttack.toLowerCase() === 'yes'){
 	theAliensCome()
 	console.log('Earth is under attack its your move')
-} else{
+} else if(earthAttack != 'yes'){
 	console.log('the earth is destroyed')
+    $('html').hide()
 }
 
 
@@ -76,35 +77,24 @@ let attackPhaseHuman = function(){
             console.log('defeated alien')
             alienFleet.shift()
             console.log(alienFleet.length + 'remaining ships')
-            break
         }
     } else{
         console.log('miss')
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+let gameOver = function(){
+    $('body').hide()
+    $('html').append('<body><h1> YOU LOSE</h1></body>')
+}
 
 let $console = $('.console')
 
 $console.append("<button id='attack'>Attack</button> <button id='retreat'>Retreat</button>")
 
-$console.click(attackPhaseHuman)
+$('#attack').click(attackPhaseHuman)
+$('#retreat').click(gameOver)
+
+
 
 
 
