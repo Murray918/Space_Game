@@ -57,11 +57,13 @@ class action extends shipStats{
 //*******************************************************************************
 //Attack Function inside of the action class
 //*******************************************************************************
-	attack (defender,attacker) {
+	attack (defender,attacker, aliens) {
 		let i = 1;
 		let x = 0;
 		//let moo = "";
 		let f="";
+		let attacker2 = {};
+		let justObj = [];
 //-------------------------------------------------------------------------------
 //Giant while loop to simulate the battle
 //-------------------------------------------------------------------------------
@@ -76,9 +78,9 @@ class action extends shipStats{
 			if (x <= defender.accruacy) {
 				attacker.hull = attacker.hull - defender.firepower;
 				//console.log("." + attacker.name);
-				f = ".a" + attacker.iName;
+				//f = ".a" + attacker.iName;
 				//moo = $( "h5:contains('" + f + "')" ).text("Hull = " + attacker.hull);
-				$( "h5" ).filter(f).text("Hull = " + attacker.hull);
+				$( "h5" ).filter(".a" + attacker.iName).text("Hull = " + attacker.hull);
 				//string = ".alien" + (i+1);
 				$( "img" ).filter("." + attacker.iName).css("padding", attacker.hull + "px");
 				//console.log(moo);
@@ -93,25 +95,65 @@ class action extends shipStats{
 //-------------------------------------------------------------------------------
 //Attacker Turn assuming it survived
 //-------------------------------------------------------------------------------
+
 			if (attacker.hull > 0) 
 			{
 				x = Math.random();
-				if (x <= attacker.accruacy ) 
-				{
+				if (x <= attacker.accruacy ) {
 					defender.hull = defender.hull - attacker.firepower;
 					$( ".defender" ).css("padding", defender.hull + "px");
-					$( "h5" ).eq(6).text("Hull = " + earthDefender.hull);
-
+					$( "h5" ).filter(".ddefender").text("Hull = " + earthDefender.hull);
+					
+					/*
+					if (checked)  //firing twice for hard mode
+					{
+						defender.hull = defender.hull - attacker.firepower;
+						$( ".defender" ).css("padding", defender.hull + "px");
+						$( "h5" ).filter(".ddefender").text("Hull = " + earthDefender.hull);
+					}
+					*/
 				//console.log("defender hull = " + defender.hull);
 				}
 				else
 				{
 					console.log("Attacker Missed " + x);
 				}
+				
+//one other aliens can fire too
+				let whichOtherAliens = 0;
+				if (checked === true) { 
+					if (aliens.length > 1) {
+						
+						if (aliens.length === 2) {
+							whichOtherAliens = 0;
+						}
+						else {
+							whichOtherAliens = random(0,(aliens.length-1));
+						}
+						
+						//console.log(aliens);
+						//console.log("alien length = " + aliens.length);
+						//console.log("other = " + whichOtherAliens)
+						//console.log(aliens.slice(whichOtherAliens,whichOtherAliens+1));
+						
+						attacker2 = aliens.slice(whichOtherAliens,whichOtherAliens+1);
+						//console.log(aliens)
+						justObj = attacker2[0];
+						attacker2 = justObj;
+						x = Math.random();
+						if (x <= attacker2.accruacy ) {
+							defender.hull = defender.hull - attacker2.firepower;
+							$( ".defender" ).css("padding", defender.hull + "px");
+							$( "h5" ).filter(".ddefender").text("Hull = " + earthDefender.hull);
+						}
+						else {
+							console.log("Attacker2 Missed " + x);
+						}
+					}
+				}
 			}
 			i++;
 		}
-		choseInterval = setInterval(blink_text_chose, 1000);
 		return 0;
 	}
 
@@ -131,8 +173,8 @@ class action extends shipStats{
 //Hide the image of the ship then hide the text with hull.  This does the explode effect.
 //-------------------------------------------------------------------------------
 			$( "img" ).filter("." + attacker.iName).toggle( "explode" );
-			f = ".a" + attacker.iName;
-			$( "h5" ).filter(f).toggle( "explode" );
+			//f = ".a" + attacker.iName;
+			$( "h5" ).filter(".a" + attacker.iName).toggle( "explode" );
 			
 		} 
 		if (defender.hull <= 0) {
@@ -140,7 +182,7 @@ class action extends shipStats{
 //Aliens win.  Earth is dddddddddooooooooommmmmmmmmeeeeeeddddd!!!!!!!!
 //-------------------------------------------------------------------------------
 			clearInterval(choseInterval);
-			$( ".chose" ).remove();
+			$( ".chose" ).stop().hide();
 			$( ".whoWins" ).text("Aliens Win.  Earth is Doomed!!!").show();
 			$( ".flee" ).prop("disabled", true);    //this refers to .flee class
 	   		$( ".fight" ).prop("disabled", true);
@@ -149,14 +191,16 @@ class action extends shipStats{
 //Hide the image of the ship then hide the text with hull.  This does the explode effect.
 //-------------------------------------------------------------------------------
 			$( "img" ).filter("." + defender.iName).toggle( "explode" );
-			f = ".d" + defender.iName;
-			$( "h5" ).filter(f).toggle( "explode" );
+			//f = ".d" + defender.iName;
+			$( "h5" ).filter(".d" + defender.iName).toggle( "explode" );
+			$( ".alien_pics").children().unbind( "click" );
+			$(".flee").hide();
 			return 0;
 		} 
 
 		if ( (aliens.length === 0) ) {
 			clearInterval(choseInterval);
-			$( ".chose" ).remove();
+			$( ".chose" ).stop().hide();
 			$( ".whoWins" ).text("Defender Wins.  Earth is Saved!!!").show();
 			$( ".flee" ).prop("disabled", true);    //this refers to .flee class
 	   		$( ".fight" ).prop("disabled", true);
@@ -204,88 +248,213 @@ function blink_text() {
 //*******************************************************************************
 //Flashing Text at Startup Function.  This one blinks between the buttons 
 //*******************************************************************************
-let choseInterval = 0;
+var choseInterval = 0;
 $('.chose').hide();
 function blink_text_chose() {
     $('.chose').fadeOut(500);
     $('.chose').fadeIn(500);
 }
 
-//-------------------------------------------------------------------------------
-//Create the Defender
-//-------------------------------------------------------------------------------
-let earthDefender = new shipStats("USS Assembly","defender");
-earthDefender.setStats([20,5,0.7]);
-$( "h5" ).eq(6).text("Hull = " + earthDefender.hull);
-$( "h2" ).eq(0).text("Earth is peacefully defended by " + earthDefender.name);
-window.setTimeout(() =>{ $( "h2" ).eq(0).text("Aliens incoming. Prepare to fight " + earthDefender.name); },2000); 
-$('.startHere').hide();
+//$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+//Start of the game
+//$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+let earthDefender = 0;
+let string = "";
+let string2 = "";
+let container = $('.alien_pics');
+let globalAction = 0;
+let fire = 0;
+let checked = 0;
 
 //-------------------------------------------------------------------------------
-//Place the 6 alien attackers into an array
+//Place up to 8 alien attackers into an array
 //-------------------------------------------------------------------------------
 let aliens = [new shipStats("Predators","alien1"), new shipStats("Empire", "alien2"),
 			  new shipStats("Borg", "alien3"), new shipStats("Count Dooku","alien4"),
-			  new shipStats("Kligons","alien5"),new shipStats("Geonosians","alien6")];
-let string = "";
+			  new shipStats("Kligons","alien5"),new shipStats("Geonosians","alien6"),
+			  new shipStats("Mega Godzilla","alien7"),new shipStats("Godzilla","alien8")];
+let numAliens = 0;
+
+function doGame() {
+	aliens = [new shipStats("Predators","alien1"), new shipStats("Empire", "alien2"),
+				  new shipStats("Borg", "alien3"), new shipStats("Count Dooku","alien4"),
+				  new shipStats("Kligons","alien5"),new shipStats("Geonosians","alien6"),
+				  new shipStats("Mega Godzilla","alien7"),new shipStats("Godzilla","alien8")];
+	
+	numAliens = random(4,aliens.length);
+	container = $('.alien_pics');
+	checked = $(".moo").is( ":checked" )
+	$(".flee").show();
+
+	$( "input" ).checkboxradio();
+	$( ".flee" ).prop("disabled", true);    //this refers to .flee class
+	$( ".fight" ).prop("disabled", true);
+	
+
+
+	//-------------------------------------------------------------------------------
+	//Create the Defender
+	//-------------------------------------------------------------------------------
+	earthDefender = new shipStats("USS Assembly","defender");
+	
+	if (!checked) {
+		earthDefender.setStats([20,5,0.7]);
+	}
+	else {   //hard mode Defender gets extra shields
+		earthDefender.setStats([(20+random(10,15)),5,0.1]);
+	}
+
+	
+	$( "h5" ).filter(".ddefender").text("Hull = " + earthDefender.hull);
+	$( "h2" ).eq(0).text("Earth is peacefully defended by " + earthDefender.name);
+	$( "img" ).filter(".defender").css("padding", earthDefender.hull);
+	$( "img" ).filter(".defender").css("background","green");
+	window.setTimeout(() =>{ $( "h2" ).eq(0).text("Aliens incoming. Prepare to fight " + earthDefender.name); },2000); 
+	$('.startHere').hide();
+
+
+
+	//-------------------------------------------------------------------------------
+	//Select a random number of aliens
+	//-------------------------------------------------------------------------------
+
+	aliens.splice(numAliens,6);   //splice off the unused aliens from the array
+
+	//-------------------------------------------------------------------------------
+	//Add the alien pictures to the DOM and assign the aliens values
+	//-------------------------------------------------------------------------------
+
+	for (let i = 0; i < numAliens; ++i) {
+		string = "<span><img class=\"" + aliens[i].iName + "\" src=\"pictures/" + aliens[i].iName + ".jpg\" title=\"" + aliens[i].name + "\" style=\"display:none\" ><h5 class=\"a" + aliens[i].iName + "\"  \
+		style=\"display:none\">Hull = </h5></span>";
+		//console.log(string)
+		container.append(string);
+		aliens[i].setStats([random(3,6),random(2,4),random(0.6,0.8)]);
+		//aliens[i].setStats([random(3,6),20,random(0.6,0.8)]);   //use this to test blowing up the defender
+		$( "h5" ).filter(".a" + aliens[i].iName).text("Hull = " + aliens[i].hull);
+		$( "img" ).filter("." + aliens[i].iName).css("padding", aliens[i].hull);
+		$( "img" ).filter("." + aliens[i].iName).css("background","white");
+	}
+	$( ".alien_pics" ).children().css("width", Math.floor(100/numAliens-1) + "%");  //this divides the pictures up with even space
+//if (checked === true) {
+
+//}		
+	
+
+	/*
+	for (let i = 0; i < aliens.length; ++i) {
+		aliens[i].setStats([random(3,6),random(2,4),random(0.6,0.8)]);
+		//aliens[i].setStats([random(3,6),20,random(0.6,0.8)]);   //use this to test blowing up the defender
+		$( "h5" ).filter(".a" + aliens[i].iName).text("Hull = " + aliens[i].hull);
+		$( "img" ).filter("." + aliens[i].iName).css("padding", aliens[i].hull);
+		$( "img" ).filter("." + aliens[i].iName).css("background","white");
+	}
+	*/
+	//-------------------------------------------------------------------------------
+	//Assign stats for the aliens
+	//-------------------------------------------------------------------------------
+	window.setTimeout(() =>{
+		//$( "h2" ).eq(0).remove();
+		$( "h2" ).eq(0).hide();
+		$( ".flee" ).prop("disabled", false);    //this refers to .flee class
+		
+		if (checked === false) {
+			$( ".flee" ).css("left","40%");
+			$( ".fight" ).prop("disabled", false);
+			$( ".fight" ).show();
+		}
+		else {
+			$( ".fight" ).hide();
+			$( ".flee" ).css("left","47%");
+		}
+		
+		//$('.startHere').hide();
+		//interval = setInterval(blink_text, 1000);
+		//choseInterval = setInterval(blink_text_chose, 1000);
+		$( "h5" ).show("slow");
+		$( "img" ).show("slow");
+	},5000); 
+
+	//-------------------------------------------------------------------------------
+	//Create a single action class
+	//-------------------------------------------------------------------------------
+	globalAction = new action("who");
+
+	//*******************************************************************************
+	//Fight function  
+	//*******************************************************************************
+
+	$( ".whoWins" ).hide();
+
+
+	$( ".alien_pics" ).children().click(function() {
+	  	let x = $(this).index();
+	 	//console.log(x);
+	 	if (checked === true) {
+	 		pickAlien(x);
+	 		$( ".alien_pics" ).children().eq(x).remove();
+	 	}
+	});
+
+
+}
+
+function pickAlien(x) {
+	console.log(x);
+	let attacker = aliens.splice(x,1);
+	console.log(aliens)
+	let justObj = attacker[0];
+	attacker = justObj;
+//-------------------------------------------------------------------------------
+//Attack 1st alien ship
+//-------------------------------------------------------------------------------
+	globalAction.attack(earthDefender,attacker,aliens);
+	//globalAction.attackSpecial(earthDefender,attacker);
 
 //-------------------------------------------------------------------------------
-//Assign stats for the 6 aliens
+//Fight is over.  Determine winner and act accordingly
 //-------------------------------------------------------------------------------
-window.setTimeout(() =>{
-	$( "h2" ).eq(0).remove();
-	$( ".flee" ).prop("disabled", false);    //this refers to .flee class
-	$( ".fight" ).prop("disabled", false);
-	choseInterval = setInterval(blink_text, 1000);
-for (let i = 0; i < 6; ++i) {
-	aliens[i].setStats([random(3,6),random(2,4),random(0.6,0.8)]);
-	//aliens[i].setStats([random(3,6),20,random(0.6,0.8)]);   //use this to test blowing up the defender
-	$( "h5" ).eq(i).text("Hull = " + aliens[i].hull).show("slow");
-	$( "img" ).eq(i).show("slow");
-	string = ".alien" + (i+1);
-	$( string ).css("padding", aliens[i].hull + "px");
-}},5000); 
+	globalAction.afterFight(earthDefender,attacker);
+	return 0;
+}
 
-//-------------------------------------------------------------------------------
-//Create a single action class
-//-------------------------------------------------------------------------------
-let globalAction = new action("who");
+		
 
-//*******************************************************************************
-//Fight function  
-//*******************************************************************************
-let attacker = "";
-let justObj = "";
-let x = 0;
-$( ".whoWins" ).hide();
+
+
 $( ".fight" ).click(function() {
+	let attacker = "";
+	let justObj = "";
+	let x = 0;
+
 	clearInterval(interval);
-	$( ".startHere" ).remove();
+	$( ".startHere" ).stop().hide();
+	$( ".startHere" ).hide();
 //-------------------------------------------------------------------------------
 //Random alien is chosen to attack and splice it from the global aliens array
 //-------------------------------------------------------------------------------
 	if ( (aliens.length > 0) && (earthDefender.currentHull() > 0) ) {
-		console.log(aliens.length-1);
+		//console.log(aliens.length-1);
 		x = random(0,(aliens.length - 1));
 		attacker = aliens.splice(x,1);
 		justObj = attacker[0];
 		attacker = justObj;
-		console.log(attacker);
+		
+		//console.log(attacker);
 	
 //-------------------------------------------------------------------------------
 //Attack 1st alien ship
 //-------------------------------------------------------------------------------
-		globalAction.attack(earthDefender,attacker);
-		//-------------------------------------------------------------------------------
+		globalAction.attack(earthDefender,attacker,aliens);
+//-------------------------------------------------------------------------------
 //Fight is over.  Determine winner and act accordingly
 //-------------------------------------------------------------------------------
 		globalAction.afterFight(earthDefender,attacker);
+		
 	} 
-
-
-	
 	return 0;
 });
+
 
 //*******************************************************************************
 //Fleeing function  
@@ -295,31 +464,39 @@ $( ".flee" ).click(function() {
 //Fleeing.  Stop the flashing text animations
 //-------------------------------------------------------------------------------
 	clearInterval(interval);
-	$( ".startHere" ).remove();
+	$( ".startHere" ).stop().hide();
+	//$( ".startHere" ).hide();
 	clearInterval(choseInterval);  
-	$( ".chose" ).remove();
+	$( ".chose" ).stop().hide();
+	//$( ".chose" ).hide();
 //-------------------------------------------------------------------------------
 //Fleeing.  Do animation to show the defender has fled and announce who won.
 //-------------------------------------------------------------------------------
 	$( "img" ).filter("." + earthDefender.iName).toggle( "pulsate" );
-	f = ".d" + earthDefender.iName;
-	$( "h5" ).filter(f).toggle( "pulsate" );
+	//f = ".d" + earthDefender.iName;
+	$( "h5" ).filter(".d" + earthDefender.iName).toggle( "pulsate" );
 	$( ".whoWins" ).text("Defender Retreats.  Earth is Doomed!!!").show();
 	earthDefender.setStats([0,0,0]);
 //-------------------------------------------------------------------------------
 //Disable the buttons
 //-------------------------------------------------------------------------------
-	$(this).attr("disabled","disabled");    //this refers to .flee class
-   	$(".fight").attr("disabled","disabled");
-
+	$( ".flee" ).prop("disabled", true);    //this refers to .flee class
+	$( ".fight" ).prop("disabled", true);
+	$( ".alien_pics").children().unbind( "click" );
+	$(".flee").hide();
 
 	return 0;
 });
 
 
+doGame();
 
-
-
+$( ".restart" ).click(function() {
+	$( ".whoWins" ).hide();
+	$( ".alien_pics" ).children().remove();
+	$( "h2" ).eq(0).show();
+	window.setTimeout(() =>{ doGame(); },1000); 
+});
 
 //$("#someElement").fadeIn(100).fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100);
 

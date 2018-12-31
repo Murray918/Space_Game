@@ -8,6 +8,9 @@ h1, h2 {
 	text-align: center;
 	color: blue;
 }
+h5 {
+	margin: 1px 1px 1px 1px;
+}
 a {
 	text-decoration: none;
 }
@@ -28,6 +31,7 @@ a {
   max-width: 150px;
   max-height: 175px;
 }
+/*
 .alien1 {
   padding: 1px 1px 1px 1px;
   background: white;
@@ -52,6 +56,7 @@ a {
   padding: 1px 1px 1px 1px;
   background: white;
 }
+*/
 .defender_pic {
   position: absolute;
    top: 55%;
@@ -63,18 +68,19 @@ a {
 .defender_pic span {
   display: table-cell;
   text-align: center;
-  width: 16%;
+  
   color: white; 
 }
 .defender_pic img {
   width: 100%;
   max-width: 200px;
 }
+/*
 .defender {
   padding: 20px 20px 20px 20px;
   background: green;
 }
-
+*/
 .flee {
   background-color: #f4511e;
   border: none;
@@ -89,7 +95,7 @@ a {
   text-decoration: none;
   cursor: pointer;
   position:absolute;
-  top:46%;
+  top:90%;
   left:40%;
 }
 .flee:hover {opacity: 1}
@@ -113,7 +119,7 @@ a {
   text-decoration: none;
   cursor: pointer;
   position:absolute;
-  top:46%;
+  top:90%;
   left:55%;
 }
 .fight:hover {opacity: 1}
@@ -122,6 +128,7 @@ a {
   box-shadow: 0 5px #666;
   transform: translateY(4px);
 }
+/*
 .footer {
   position: fixed;
   left: 0;
@@ -133,7 +140,7 @@ a {
   display: inline-block;
   vertical-align: middle;
 }
-
+*/
 .restart {
   background-color: #111199;
   border: none;
@@ -148,8 +155,8 @@ a {
   text-decoration: none;
   cursor: pointer;
   position:absolute;
-  	top:2%;
-  	left:2%;
+  top:2%;
+  left:2%;
 }
 .restart:hover {opacity: 1}
 .restart:active {
@@ -157,18 +164,24 @@ a {
   box-shadow: 0 5px #666;
   transform: translateY(4px);
 }
-.statusLabel {
-	
+.moo {
+	position:absolute;
+  	top:3%;
+  	left:88%;
+  	background-color: #111199;
+    border: none;
+    color: white;
+
 }
 .startHere {
 	position:absolute;
-  	top:48%;
+  	top:92%;
   	left:62%;
   	color: #FFFFFF;
 }
 .chose {
 	position:absolute;
-  	top:48%;
+  	top:92%;
   	left:46%;
   	color: #FFFFFF;
 }
