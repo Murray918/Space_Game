@@ -46,7 +46,7 @@ class alienShip {
 }
 
 
-let turn = []
+
 let alienFleet = []
 let theAliensCome = function() {
     alienFleet.push(new alienShip)
@@ -69,23 +69,60 @@ if(earthAttack.toLowerCase() === 'yes'){
 }
 
 
+
+
+
+
+
 let attackPhaseHuman = function(){
+ if(alienFleet.length != 0){
     if(earthShip.accuracy() === 'hit'){
         alienFleet[0].hull -= earthShip.firePower
         console.log('you hit')
-        if(alienFleet[0].hull <=0){
+        if(alienFleet[0].hull <=0){ //if you kill the ship you get to attack first again
             console.log('defeated alien')
             alienFleet.shift()
-            console.log(alienFleet.length + 'remaining ships')
+            console.log(alienFleet.length + ' remaining ships')
+            let nextRound = prompt('Do you wish to continue?')//currently to show win screen you need to attack when there is no more alien ships left
+            if(nextRound.toLowerCase() != 'yes'){
+                gameOver()
+            }
+        } else{ //aliens attack at the end of each phase
+            
+            attackPhaseAlien()
         }
-    } else{
+
+    } else{ //aliens attack at the end of each phase
         console.log('miss')
+        attackPhaseAlien()
+    }
+}else {
+    gameOver()
+}
+}
+
+let attackPhaseAlien = function(){
+    if(alienFleet[0].accuracy() === 'hit'){
+        earthShip.hull -= alienFleet[0].firePower
+        console.log("you've been hit, hull strength down to " + earthShip.hull )
+        if(earthShip.hull <=0){
+            gameOver()
+        }
+    } else {
+        console.log('There Lasers missed you')
     }
 }
+
 let gameOver = function(){
+    if(alienFleet.length === 0){
+    $('body').hide()
+    $('html').append('<body><h1> YOU WIN</h1></body>')
+    } else{
     $('body').hide()
     $('html').append('<body><h1> YOU LOSE</h1></body>')
+    }
 }
+
 
 let $console = $('.console')
 
