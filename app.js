@@ -56,3 +56,21 @@ let theAliensCome = function() {
     alienFleet.push(new alienShip)
     alienFleet.push(new alienShip)
 }
+
+
+let earthAttack = prompt('Do you wish to do battle? \n if so type yes')
+
+if(earthAttack.toLowerCase() === 'yes'){
+	theAliensCome()
+	console.log('Earth is under attack its your move')
+} else{
+	console.log('the earth is destroyed')
+}
+
+let $console = $('.console')
+
+$console.append("<button id='attack'>Attack</button> <button id='retreat'>Retreat</button>")
+
+$console.click(earthShip.accuracy)
+
+
