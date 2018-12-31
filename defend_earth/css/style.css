@@ -191,6 +191,14 @@ a {
   	left:41%;
   	color: #FFFFFF;
 }
+.instr2 {
+	position:absolute;
+  	top:92%;
+  	left:2%;
+  	color: #FFFFFF;
+  	font-size: 10px;
+
+}
 
 /*
 .battleText {

@@ -168,7 +168,7 @@ class action extends shipStats{
 //Defender wins and Attacker Blew up.  Slowly hide the attacker from battle as it blew up
 //-------------------------------------------------------------------------------
 			//console.log("attack phase " + i + " over.  Attacker Loses hull = " + attacker.hull + " Defender Wins hull = " + defender.hull);
-			$( ".statusLabel" ).text("Phase over. " + attacker.name + " Loses -- Defender Wins");
+			//$( ".statusLabel" ).text("Phase over. " + attacker.name + " Loses -- Defender Wins");
 //-------------------------------------------------------------------------------
 //Hide the image of the ship then hide the text with hull.  This does the explode effect.
 //-------------------------------------------------------------------------------
@@ -195,6 +195,7 @@ class action extends shipStats{
 			$( "h5" ).filter(".d" + defender.iName).toggle( "explode" );
 			$( ".alien_pics").children().unbind( "click" );
 			$(".flee").hide();
+			$( ".instr" ).text("Push Replay button to Start Over")
 			return 0;
 		} 
 
@@ -204,6 +205,7 @@ class action extends shipStats{
 			$( ".whoWins" ).text("Defender Wins.  Earth is Saved!!!").show();
 			$( ".flee" ).prop("disabled", true);    //this refers to .flee class
 	   		$( ".fight" ).prop("disabled", true);
+	   		$( ".instr" ).text("Push Replay button to Start Over")
 	   		//$('#btn2').prop("disabled", true);
 		}
 	}
@@ -285,6 +287,7 @@ function doGame() {
 	container = $('.alien_pics');
 	checked = $(".moo").is( ":checked" )
 	$(".flee").show();
+	//$( ".instr" ).hide();
 
 	$( "input" ).checkboxradio();
 	$( ".flee" ).prop("disabled", true);    //this refers to .flee class
@@ -301,7 +304,7 @@ function doGame() {
 		earthDefender.setStats([20,5,0.7]);
 	}
 	else {   //hard mode Defender gets extra shields
-		earthDefender.setStats([(20+random(10,15)),5,0.1]);
+		earthDefender.setStats([(20+random(10,15)),5,0.7]);
 	}
 
 	
@@ -357,15 +360,18 @@ function doGame() {
 		//$( "h2" ).eq(0).remove();
 		$( "h2" ).eq(0).hide();
 		$( ".flee" ).prop("disabled", false);    //this refers to .flee class
-		
+		$( ".instr" ).show()
 		if (checked === false) {
 			$( ".flee" ).css("left","40%");
 			$( ".fight" ).prop("disabled", false);
 			$( ".fight" ).show();
+			$( ".instr" ).text("Push Fight button to randomly select an alien to attack or Flee button to flee. Check Hard Mode and Press Replay button to battle in Hard mode")
+			
 		}
 		else {
 			$( ".fight" ).hide();
 			$( ".flee" ).css("left","47%");
+			$( ".instr" ).text("Push alien picture to select which one to destroy or Flee button to flee.  Deslect Hard Mode and Press Replay button to play in Standard Mode")
 		}
 		
 		//$('.startHere').hide();
@@ -400,9 +406,9 @@ function doGame() {
 }
 
 function pickAlien(x) {
-	console.log(x);
+	//console.log(x);
 	let attacker = aliens.splice(x,1);
-	console.log(aliens)
+	//console.log(aliens)
 	let justObj = attacker[0];
 	attacker = justObj;
 //-------------------------------------------------------------------------------
@@ -450,6 +456,7 @@ $( ".fight" ).click(function() {
 //Fight is over.  Determine winner and act accordingly
 //-------------------------------------------------------------------------------
 		globalAction.afterFight(earthDefender,attacker);
+		$( ".alien_pics" ).children().eq(x).remove();
 		
 	} 
 	return 0;
@@ -484,6 +491,7 @@ $( ".flee" ).click(function() {
 	$( ".fight" ).prop("disabled", true);
 	$( ".alien_pics").children().unbind( "click" );
 	$(".flee").hide();
+	$( ".instr" ).text("Push Replay button to Start Over")
 
 	return 0;
 });
