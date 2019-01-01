@@ -1,12 +1,22 @@
-
 body {
-	width: 95%;
-	background: black;
+    margin: 10px auto;
+    background: black;
 }
+
 .ship {
-	width: 13%;
-	display: inline-block;
-	margin: 4px auto;
-	padding:50px 4px;
-	background: white;
+    padding: 40px 20px;
+    margin: 10px auto;
+    background: white;
+    text-align: center;
+}
+
+.earth {
+    width: 50%;
+    margin: 300px auto 10px auto;
+}
+
+#fleet {
+    margin: 0 auto;
+    display: flex;
+    width: 90%;
 }
