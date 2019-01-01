@@ -26,6 +26,7 @@ hull - between 3 and 6
 firepower - between 2 and 4
 accuracy - between .6 and .8 You should be battling six alien ships each with unique values.
 */
+"use strict";
 
 class shipStats {
 	constructor (name,iName) {
@@ -283,6 +284,8 @@ function doGame() {
 				  new shipStats("Kligons","alien5"),new shipStats("Geonosians","alien6"),
 				  new shipStats("Mega Godzilla","alien7"),new shipStats("Godzilla","alien8")];
 	
+
+	
 	numAliens = random(4,aliens.length);
 	container = $('.alien_pics');
 	checked = $(".moo").is( ":checked" )
@@ -365,13 +368,12 @@ function doGame() {
 			$( ".flee" ).css("left","40%");
 			$( ".fight" ).prop("disabled", false);
 			$( ".fight" ).show();
-			$( ".instr" ).text("Push Fight button to randomly select an alien to attack or Flee button to flee. Check Hard Mode and Press Replay button to battle in Hard mode")
-			
+			$( ".instr" ).text("Push Fight button to randomly select an alien to attack or Flee button to flee. Check Hard Mode to battle in Hard mode")
 		}
 		else {
 			$( ".fight" ).hide();
 			$( ".flee" ).css("left","47%");
-			$( ".instr" ).text("Push alien picture to select which one to destroy or Flee button to flee.  Deslect Hard Mode and Press Replay button to play in Standard Mode")
+			$( ".instr" ).text("Push alien picture to select which one to destroy or Flee button to flee.  Deslect Hard Mode to play in Standard Mode")
 		}
 		
 		//$('.startHere').hide();
@@ -401,9 +403,7 @@ function doGame() {
 	 		$( ".alien_pics" ).children().eq(x).remove();
 	 	}
 	});
-
-
-}
+}  //end of doGame
 
 function pickAlien(x) {
 	//console.log(x);
@@ -497,7 +497,7 @@ $( ".flee" ).click(function() {
 });
 
 
-doGame();
+
 
 $( ".restart" ).click(function() {
 	$( ".whoWins" ).hide();
@@ -506,6 +506,15 @@ $( ".restart" ).click(function() {
 	window.setTimeout(() =>{ doGame(); },1000); 
 });
 
+$( ".moo" ).on("change", (function() {
+	$( ".whoWins" ).hide();
+	$( ".alien_pics" ).children().remove();
+	$( "h2" ).eq(0).show();
+	//aliens = [];
+	window.setTimeout(() =>{ doGame(); },1000);
+	return 0; 
+}));
+doGame();
 //$("#someElement").fadeIn(100).fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100);
 
 
