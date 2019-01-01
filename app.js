@@ -1,3 +1,4 @@
+
 // create Ship class to use as prototype of all ships in game
 class Ship {
     constructor(name, hull, firepower, accuracy) {
@@ -17,8 +18,8 @@ class Ship {
         }
     }
     update() {
-		console.log(`*${this.name}'s hull: ${this.hull}, `);
-	}
+        console.log(`*${this.name}'s hull: ${this.hull}, `);
+    }
 }
 // create USS Assembly ship with pre-determined parameters
 let USSA = new Ship("USS Assembly", 20, 5, 0.7);
@@ -35,36 +36,36 @@ for (let i = 0; i < 6; i++) {
 // loop for whole game: while USSA hull >0 and alienFleet.length > 0
 while (USSA.hull > 0 && alienFleet.length > 0) {
 
-        console.log("==============================")
-        console.log("==============================")
+    console.log("==============================")
+    console.log("==============================")
 
-        USSA.attack(alienFleet[0]);
+    USSA.attack(alienFleet[0]);
+    USSA.update();
+    alienFleet[0].update();
+
+    // check whether USSA.attack destroyed alienFleet[0]
+    if (alienFleet[0].hull > 0) {
+
+        // alienFleet[0] attacks USSA
+        alienFleet[0].attack(USSA);
         USSA.update();
         alienFleet[0].update();
 
-        // check whether USSA.attack destroyed alienFleet[0]
-        if (alienFleet[0].hull > 0) {
-
-            // alienFleet[0] attacks USSA
-            alienFleet[0].attack(USSA);
-            USSA.update();
-        	alienFleet[0].update();
-
-            if (USSA.hull <= 0) {
-                console.log("Game Over");
-                break;
-            }
-
-        } else {
-            // remove 1st alien ship from alienFleet
-            alienFleet.shift();
-            console.log(`Alien Ships left: ${alienFleet.length}`);
-            
-            // prompt player: "attack next alien ship" or "retreat"?, log 'game over' and break if retreat
-            
+        if (USSA.hull <= 0) {
+            console.log("Game Over");
+            break;
         }
+
+    } else {
+        // remove 1st alien ship from alienFleet
+        alienFleet.shift();
+        console.log(`Alien Ships left: ${alienFleet.length}`);
+
+        // prompt player: "attack next alien ship" or "retreat"?, log 'game over' and break if retreat
+        
+    }
 }
 // console log victory if the while loop completes due to all alien ships being destroyed, not USSA.hull < 0
-if (USSA.hull >0 && alienFleet.length === 0) {
-	console.log("Victory!")
+if (USSA.hull > 0 && alienFleet.length === 0) {
+    console.log("Victory!")
 }

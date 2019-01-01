@@ -1,22 +1,32 @@
 body {
     margin: 10px auto;
     background: black;
+    text-align: center;
+}
+#battlefield {
+
 }
 
 .ship {
-    padding: 40px 20px;
+    width: 10%;
+    padding: 40px 10px;
     margin: 10px auto;
     background: white;
-    text-align: center;
 }
 
-.earth {
+#player {
     width: 50%;
     margin: 300px auto 10px auto;
+    background: white;
+
 }
 
 #fleet {
     margin: 0 auto;
     display: flex;
     width: 90%;
+}
+
+button {
+	
 }
