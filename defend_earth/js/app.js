@@ -268,6 +268,7 @@ let container = $('.alien_pics');
 let globalAction = 0;
 let fire = 0;
 let checked = 0;
+let misslecnt = 2;
 
 //-------------------------------------------------------------------------------
 //Place up to 8 alien attackers into an array
@@ -290,6 +291,7 @@ function doGame() {
 	container = $('.alien_pics');
 	checked = $(".moo").is( ":checked" )
 	$(".flee").show();
+	$(".missleCountLegend").text("Missle Count: " + misslecnt);
 	//$( ".instr" ).hide();
 
 	$( "input" ).checkboxradio();
@@ -365,14 +367,14 @@ function doGame() {
 		$( ".flee" ).prop("disabled", false);    //this refers to .flee class
 		$( ".instr" ).show()
 		if (checked === false) {
-			$( ".flee" ).css("left","40%");
+			//$( ".flee" ).css("left","40%");
 			$( ".fight" ).prop("disabled", false);
 			$( ".fight" ).show();
 			$( ".instr" ).text("Push Fight button to randomly select an alien to attack or Flee button to flee. Check Hard Mode to battle in Hard mode")
 		}
 		else {
 			$( ".fight" ).hide();
-			$( ".flee" ).css("left","47%");
+			//$( ".flee" ).css("left","47%");
 			$( ".instr" ).text("Push alien picture to select which one to destroy or Flee button to flee.  Deslect Hard Mode to play in Standard Mode")
 		}
 		

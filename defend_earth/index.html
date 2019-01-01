@@ -50,21 +50,28 @@
  </span>
 -->
  </div>
-
+<!--
 <div class="buttons">
 	<button type="button" class="flee" title="You may want to rethink this!!!" disabled>FLEE!!!</button>
 	<button type="button" class="fight" title="Go show those Aliens who's boss!!!" disabled>FIGHT</button>
 	<label class="startHere"><--- Press FIGHT to Defend Earth from the Aliens!!!</label>
-	<label class="chose"><-- Push Flee or Fight --></label>
+	<label class="chose"><-- Push Flee or Fight </label>
 	<h2 class="whoWins">Defender Wins</h2>
 </div>
-
+-->
 <!--<button type="button" class="restart" onClick="window.location.reload('false')">restart</button> -->
 <button type="button" class="restart">Replay</button> 
 
 <label class="moo" for="checkbox-1">Hard Mode</label>
 <input type="checkbox" name="checkbox-1" id="checkbox-1" class="moo">
 
+<!--
+<fieldset class="missleCount">
+	<legend class="missleCountLegend">Missle Count: </legend>
+	<label class="missle" for="checkbox-2">Use Missles</label>
+	<input type="checkbox" name="checkbox-2" id="checkbox-2" class="missle">
+</fieldset>
+-->
 <fieldset class="instr2">
     <legend>Instructions: </legend>
     <label class="instr">Instructions here</label>
@@ -77,13 +84,24 @@ Fight results go here
 </textarea>
 -->
 <div class="defender_pic">
-<span><img class="defender" src="pictures/defender4.jpg"
+<img class="defender" src="pictures/defender4.jpg"
      alt="Defender 1"
      width="200"
      height="230"
      title="Try not to get blown up!!!">
      <h5 class="ddefender">Hull = </h5>
- </span>
+     <div class="buttons">
+		<button type="button" class="flee" title="You may want to rethink this!!!" disabled>FLEE!!!</button>
+		<button type="button" class="fight" title="Go show those Aliens who's boss!!!" disabled>FIGHT</button>
+		<label class="startHere"><--- Press FIGHT to Defend Earth from the Aliens!!!</label>
+		<label class="chose"><-- Push Flee or Fight --></label>
+		<h2 class="whoWins">Defender Wins</h2>
+		<fieldset class="missleCount">
+			<legend class="missleCountLegend">Missle Count: </legend>
+			<label class="missle" for="checkbox-2">Use Missles</label>
+			<input type="checkbox" name="checkbox-2" id="checkbox-2" class="missle">
+		</fieldset>
+	</div>
 </div>
 
 <div id="container"></div>

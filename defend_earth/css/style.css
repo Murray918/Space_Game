@@ -1,8 +1,8 @@
 body {
   background: url(../pictures/space_background.jpg) no-repeat center center;
   background-size: cover;
-  height: 90vh;
-  /* width: 900px; */ 
+  height: 100vh;
+  /* width: 900px;  */
 }
 h1, h2 {
 	text-align: center;
@@ -59,21 +59,26 @@ a {
 */
 .defender_pic {
   position: absolute;
-   top: 55%;
-   
-  display: table;
-  width: 100%;
-  margin: 0px auto;
-}
-.defender_pic span {
+  top: 53%;
+  left: 43%;
   display: table-cell;
   text-align: center;
-  
-  color: white; 
+  width: 200px;
+  height: 200px;
+  /* display: table; 
+  width: 100%;
+  display: inline-block;
+  margin: 0px auto; */
+}
+.ddefender {
+	color: white;
+	text-align: center;
+	padding: 0px 0px 0 50px;
 }
 .defender_pic img {
   width: 100%;
   max-width: 200px;
+  margin: 0px auto;
 }
 /*
 .defender {
@@ -94,9 +99,9 @@ a {
   display: inline-block;
   text-decoration: none;
   cursor: pointer;
-  position:absolute;
-  top:90%;
-  left:40%;
+  position:relative;
+  top:-190px;
+  left:220px;
 }
 .flee:hover {opacity: 1}
 .flee:active {
@@ -118,9 +123,9 @@ a {
   display: inline-block;
   text-decoration: none;
   cursor: pointer;
-  position:absolute;
-  top:90%;
-  left:55%;
+  position:relative;
+  top:-340px;
+  left:220px;
 }
 .fight:hover {opacity: 1}
 .fight:active {
@@ -171,7 +176,17 @@ a {
   	background-color: #111199;
     border: none;
     color: white;
-
+}
+.missle {
+  	background-color: #111199;
+    border: none;
+    color: white;
+}
+.missleCount {
+	position:relative;
+  	top:-220px;
+  	left:260px;
+  	color: white;
 }
 .startHere {
 	position:absolute;
