@@ -1,0 +1,12 @@
+
+body {
+	width: 95%;
+	background: black;
+}
+.ship {
+	width: 13%;
+	display: inline-block;
+	margin: 4px auto;
+	padding:50px 4px;
+	background: white;
+}

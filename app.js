@@ -61,14 +61,7 @@ while (USSA.hull > 0 && alienFleet.length > 0) {
             console.log(`Alien Ships left: ${alienFleet.length}`);
             
             // prompt player: "attack next alien ship" or "retreat"?, log 'game over' and break if retreat
-            let choice = prompt("Attack next ship?\nEnter 1 for 'yes'\nEnter 2 for'no'")
-            console.log(choice)
-            if (choice === 1) {
-            	continue;
-            } else {
-            	console.log("Game Over");
-            	break;
-            }
+            
         }
 }
 // console log victory if the while loop completes due to all alien ships being destroyed, not USSA.hull < 0
