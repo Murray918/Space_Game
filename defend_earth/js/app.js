@@ -36,6 +36,8 @@ class shipStats {
 		this.hull = 0; //statsArray[0];
 		this.firepower = 0; //statsArray[1];
 		this.accruacy = 0; //statsArray[2];
+		this.misslecnt = 0; //statsArray[3];
+		this.missleFirepower = 0;  //statsArray[4];
 	}
 
 	currentHull () {
@@ -45,6 +47,8 @@ class shipStats {
 		this.hull = statsArray[0];
 		this.firepower = statsArray[1];
 		this.accruacy = statsArray[2];
+		this.misslecnt = statsArray[3];
+		this.missleFirepower = statsArray[4];
 		return 0;
 	}
 }
@@ -69,6 +73,32 @@ class action extends shipStats{
 //Giant while loop to simulate the battle
 //-------------------------------------------------------------------------------
 		while (attacker.hull > 0 && defender.hull > 0) {
+
+//-------------------------------------------------------------------------------
+//Defender has missles that always hit the target and very powerful.  Must be in Hard Mode
+//-------------------------------------------------------------------------------
+			if (checked && ($(".missle3").is( ":checked" ) ) && (defender.misslecnt > 0)  ) {
+					console.log("missles " + defender.misslecnt);
+					attacker.hull = attacker.hull - defender.missleFirepower;
+					$( "h5" ).filter(".a" + attacker.iName).text("Hull = " + attacker.hull);
+					$( "img" ).filter("." + attacker.iName).css("padding", attacker.hull + "px");
+					defender.misslecnt--;
+					$(".missleCountLegend").text("Missle Count: " + defender.misslecnt);
+					
+					if (defender.misslecnt <= 0)
+					{
+						$( ".missle3" ).checkboxradio( "disable" );
+					}
+			}
+
+//-------------------------------------------------------------------------------
+//If the missles blew up the ship then no need to fire lasers.
+//-------------------------------------------------------------------------------
+			if (attacker.hull <= 0)
+			{
+				continue;
+			}
+
 //-------------------------------------------------------------------------------
 //Calculate the defender's accuracy this turn
 //-------------------------------------------------------------------------------
@@ -196,6 +226,8 @@ class action extends shipStats{
 			$( "h5" ).filter(".d" + defender.iName).toggle( "explode" );
 			$( ".alien_pics").children().unbind( "click" );
 			$(".flee").hide();
+			$(".fight").hide();
+			$( ".missleCount" ).hide();
 			$( ".instr" ).text("Push Replay button to Start Over")
 			return 0;
 		} 
@@ -268,7 +300,15 @@ let container = $('.alien_pics');
 let globalAction = 0;
 let fire = 0;
 let checked = 0;
-let misslecnt = 2;
+//let misslecnt = 2;
+let fleeStylesHard = {
+      top : "-250px",
+      left: "250px"
+};
+let fleeStylesEasy = {
+      top : "-190px",
+      left: "220px"
+};
 
 //-------------------------------------------------------------------------------
 //Place up to 8 alien attackers into an array
@@ -289,12 +329,13 @@ function doGame() {
 	
 	numAliens = random(4,aliens.length);
 	container = $('.alien_pics');
-	checked = $(".moo").is( ":checked" )
+	checked = $(".moo2").is( ":checked" )
 	$(".flee").show();
-	$(".missleCountLegend").text("Missle Count: " + misslecnt);
+	
 	//$( ".instr" ).hide();
 
-	$( "input" ).checkboxradio();
+	$( ".missle3" ).checkboxradio();
+	$( ".moo2" ).checkboxradio();
 	$( ".flee" ).prop("disabled", true);    //this refers to .flee class
 	$( ".fight" ).prop("disabled", true);
 	
@@ -305,14 +346,21 @@ function doGame() {
 	//-------------------------------------------------------------------------------
 	earthDefender = new shipStats("USS Assembly","defender");
 	
+	$( ".defender" ).show();
 	if (!checked) {
-		earthDefender.setStats([20,5,0.7]);
+		earthDefender.setStats([20,5,0.7,0,0]);
+		$( ".fight" ).show();
+		$( ".missleCount" ).hide();
+		$( ".flee" ).css(fleeStylesEasy);  //adjust the position of the flee button
 	}
 	else {   //hard mode Defender gets extra shields
-		earthDefender.setStats([(20+random(10,15)),5,0.7]);
+		earthDefender.setStats([(20+random(10,15)),5,0.7,2,10]);
+		$( ".missleCount" ).show();
+		$( ".fight" ).hide();
+		$( ".flee" ).css(fleeStylesHard);  //adjust the position of the flee button
 	}
-
 	
+	$(".missleCountLegend").text("Missle Count: " + earthDefender.misslecnt);
 	$( "h5" ).filter(".ddefender").text("Hull = " + earthDefender.hull);
 	$( "h2" ).eq(0).text("Earth is peacefully defended by " + earthDefender.name);
 	$( "img" ).filter(".defender").css("padding", earthDefender.hull);
@@ -337,7 +385,7 @@ function doGame() {
 		style=\"display:none\">Hull = </h5></span>";
 		//console.log(string)
 		container.append(string);
-		aliens[i].setStats([random(3,6),random(2,4),random(0.6,0.8)]);
+		aliens[i].setStats([random(3,6),random(2,4),random(0.6,0.8),0,0]);
 		//aliens[i].setStats([random(3,6),20,random(0.6,0.8)]);   //use this to test blowing up the defender
 		$( "h5" ).filter(".a" + aliens[i].iName).text("Hull = " + aliens[i].hull);
 		$( "img" ).filter("." + aliens[i].iName).css("padding", aliens[i].hull);
@@ -369,11 +417,11 @@ function doGame() {
 		if (checked === false) {
 			//$( ".flee" ).css("left","40%");
 			$( ".fight" ).prop("disabled", false);
-			$( ".fight" ).show();
+			//$( ".fight" ).show();
 			$( ".instr" ).text("Push Fight button to randomly select an alien to attack or Flee button to flee. Check Hard Mode to battle in Hard mode")
 		}
 		else {
-			$( ".fight" ).hide();
+			//$( ".fight" ).hide();
 			//$( ".flee" ).css("left","47%");
 			$( ".instr" ).text("Push alien picture to select which one to destroy or Flee button to flee.  Deslect Hard Mode to play in Standard Mode")
 		}
@@ -505,13 +553,17 @@ $( ".restart" ).click(function() {
 	$( ".whoWins" ).hide();
 	$( ".alien_pics" ).children().remove();
 	$( "h2" ).eq(0).show();
+	$( ".missle3" ).checkboxradio( "enable" );
+	$(".missle3").prop("checked", false).checkboxradio("refresh");
 	window.setTimeout(() =>{ doGame(); },1000); 
 });
 
-$( ".moo" ).on("change", (function() {
+$( ".moo2" ).on("change", (function() {
 	$( ".whoWins" ).hide();
 	$( ".alien_pics" ).children().remove();
 	$( "h2" ).eq(0).show();
+	$( ".missle3" ).checkboxradio( "enable" );
+	$(".missle3").prop("checked", false).checkboxradio("refresh");
 	//aliens = [];
 	window.setTimeout(() =>{ doGame(); },1000);
 	return 0; 

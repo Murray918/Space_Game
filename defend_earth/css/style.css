@@ -7,6 +7,7 @@ body {
 h1, h2 {
 	text-align: center;
 	color: blue;
+	margin: 1px 1px 5px 1px;
 }
 h5 {
 	margin: 1px 1px 1px 1px;
@@ -59,8 +60,8 @@ a {
 */
 .defender_pic {
   position: absolute;
-  top: 53%;
-  left: 43%;
+  top: 58%;
+  left: 44%;
   display: table-cell;
   text-align: center;
   width: 200px;
@@ -171,11 +172,12 @@ a {
 }
 .moo {
 	position:absolute;
-  	top:3%;
-  	left:88%;
+  	top:2%;
+  	left:9%;
   	background-color: #111199;
     border: none;
     color: white;
+    margin: 4px 2px;
 }
 .missle {
   	background-color: #111199;
@@ -184,8 +186,8 @@ a {
 }
 .missleCount {
 	position:relative;
-  	top:-220px;
-  	left:260px;
+  	top:-200px;
+  	left:290px;
   	color: white;
 }
 .startHere {
@@ -212,7 +214,6 @@ a {
   	left:2%;
   	color: #FFFFFF;
   	font-size: 12px;
-
 }
 
 /*
