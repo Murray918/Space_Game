@@ -7,11 +7,11 @@ class Ship {
         this.accuracy = accuracy;
     }
     attack(enemy) {
-        if (0 <= Math.random() <= this.accuracy) {
-            enemy.hull -= this.firepower;
-            console.log(`${this.firepower} damage dealt.`);
+        if (Math.random() > this.accuracy) {
+            console.log(`${this.name} missed`);
         } else {
-            console.log(`missed`);
+            enemy.hull -= this.firepower;
+            console.log(`${enemy.name} took ${this.firepower} damage.`);
         }
     }
 }
@@ -25,11 +25,18 @@ let alienFleet = [];
 for (let i = 0; i < 6; i++) {
     alienFleet[i] = new Ship(`Alien Ship ${i+1}`,(Math.floor(Math.random() * (7 - 3) + 3)), (Math.floor(Math.random() * (5 - 2) + 2)), (Math.random() * (0.8 - 0.6) + 0.6))
 }
-
+console.log(alienFleet[0]);
 console.log(USSA);
-console.log(alienFleet[0])
-console.log(alienFleet[1])
-console.log(alienFleet[2])
-console.log(alienFleet[3])
-console.log(alienFleet[4])
-console.log(alienFleet[5])
+console.log("==============================")
+console.log(alienFleet[0].attack(USSA));
+console.log(alienFleet[1].attack(USSA));
+console.log(alienFleet[2].attack(USSA));
+
+
+
+
+
+
+
+
+
