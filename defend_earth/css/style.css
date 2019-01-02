@@ -1,0 +1,255 @@
+body {
+  background: url(../pictures/space_background.jpg) no-repeat center center;
+  background-size: cover;
+  height: 100vh;
+  /* width: 900px;  */
+}
+h1, h2 {
+	text-align: center;
+	color: blue;
+	margin: 1px 1px 5px 1px;
+}
+h5 {
+	margin: 1px 1px 1px 1px;
+}
+a {
+	text-decoration: none;
+}
+.alien_pics {
+  display: table;
+  width: 100%;
+  margin: 0px auto;
+}
+.alien_pics span {
+  display: table-cell;
+  text-align: center;
+  width: 16%; 
+  color: white; 
+  
+}
+.alien_pics img {
+  width: 100%;
+  max-width: 150px;
+  max-height: 175px;
+}
+
+.mega_pics {
+  display: table;
+  width: 100%;
+  margin: 30px auto;
+}
+.mega_pics span {
+  display: table-cell;
+  text-align: center;
+  width: 100%; 
+  color: white; 
+  
+}
+.mega_pics img {
+  width: 100%;
+  max-width: 300px;
+  max-height: 250px;
+}
+
+
+
+/*
+.alien1 {
+  padding: 1px 1px 1px 1px;
+  background: white;
+}
+.alien2 {
+  padding: 1px 1px 1px 1px;
+  background: white;
+}
+.alien3 {
+  padding: 1px 1px 1px 1px;
+  background: white;
+}
+.alien4 {
+  padding: 1px 1px 1px 1px;
+  background: white;
+}
+.alien5 {
+  padding: 1px 1px 1px 1px;
+  background: white;
+}
+.alien6 {
+  padding: 1px 1px 1px 1px;
+  background: white;
+}
+*/
+.defender_pic {
+  position: absolute;
+  top: 58%;
+  left: 43%;
+  display: table-cell;
+  text-align: center;
+  width: 200px;
+  height: 200px;
+  /* display: table; 
+  width: 100%;
+  display: inline-block;
+  margin: 0px auto; */
+}
+.ddefender {
+	color: white;
+	text-align: center;
+	padding: 0px 0px 0 50px;
+}
+.defender_pic img {
+  width: 100%;
+  max-width: 200px;
+  margin: 0px auto;
+}
+/*
+.defender {
+  padding: 20px 20px 20px 20px;
+  background: green;
+}
+*/
+.flee {
+  background-color: #f4511e;
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-align: center;
+  font-size: 16px;
+  margin: 4px 2px;
+  opacity: 0.6;
+  transition: 0.3s;
+  display: inline-block;
+  text-decoration: none;
+  cursor: pointer;
+  position:relative;
+  top:-190px;
+  left:220px;
+}
+.flee:hover {opacity: 1}
+.flee:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+.fight {
+  background-color: #11FF1e;
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-align: center;
+  font-size: 16px;
+  margin: 4px 2px;
+  opacity: 0.6;
+  transition: 0.3s;
+  display: inline-block;
+  text-decoration: none;
+  cursor: pointer;
+  position:relative;
+  top:-340px;
+  left:220px;
+}
+.fight:hover {opacity: 1}
+.fight:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+/*
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #800000;
+  color: white;
+  text-align: center;
+  display: inline-block;
+  vertical-align: middle;
+}
+*/
+.restart {
+  background-color: #111199;
+  border: none;
+  color: white;
+  padding: 5px 10px;
+  text-align: center;
+  font-size: 16px;
+  margin: 4px 2px;
+  opacity: 0.6;
+  transition: 0.3s;
+  display: inline-block;
+  text-decoration: none;
+  cursor: pointer;
+  position:absolute;
+  top:2%;
+  left:2%;
+}
+.restart:hover {opacity: 1}
+.restart:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+.moo {
+	position:absolute;
+  	top:2%;
+  	left:9%;
+  	background-color: #111199;
+    border: none;
+    color: white;
+    margin: 4px 2px;
+}
+.missle {
+  	background-color: #111199;
+    border: none;
+    color: white;
+}
+.missleCount {
+	position:relative;
+  	top:-200px;
+  	left:290px;
+  	color: white;
+}
+.startHere {
+	position:absolute;
+  	top:92%;
+  	left:62%;
+  	color: #FFFFFF;
+}
+.chose {
+	position:absolute;
+  	top:92%;
+  	left:46%;
+  	color: #FFFFFF;
+}
+.whoWins {
+	position:absolute;
+  	top:35%;
+  	left:41%;
+  	color: #FFFFFF;
+}
+.instr2 {
+	position:absolute;
+  	top:92%;
+  	left:2%;
+  	color: #FFFFFF;
+  	font-size: 12px;
+}
+.score1 {
+	position:absolute;
+  	top:82%;
+  	left:2%;
+  	color: #FFFFFF;
+  	font-size: 12px;
+}
+/*
+.battleText {
+	position:absolute;
+  	top:60%;
+  	left:80%;
+  	color: #FFFFFF;
+  	opacity: 0.3;
+  	background-color: #000000;
+}
+*/
