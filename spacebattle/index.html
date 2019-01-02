@@ -10,20 +10,25 @@
 	<link rel="stylesheet" type="text/css" href="./style.css">
 </head>
 <body>
-	<div id="enemyContainer"></div>
-	<div class="enemyDeathContainer">
-		<h2>You Win!</h2>
-		<button class="reset">Play Again?</button>
+	<div class = "gameContainer">
+		<div id="enemyContainer"></div>
+		<div class="enemyDeathContainer">
+			<h2>You Win!</h2>
+			<button class="reset">Play Again?</button>
+		</div>
+		<div id="enemyStatsContainer"></div>
 	</div>
-	<div id="enemyStatsContainer"></div>
 	<div class="gameOverContainer">
 		<h2>Game Over</h2>
 		<button class="reset">Play Again?</button>
 	</div>
-	<div id="playerUIContainer">
-		<button id="attack">Attack!</button>
-		<button id="missles">Missles!</button>
-		<div class="playerStats"></div>
+	<div class = "gameContainer">
+		<div id="playerUIContainer">
+			<button id="attack">Attack!</button>
+			<button id="missles">Missles!</button>
+			<button id="retreat">Retreat!</button>
+			<div class="playerStats"></div>
+		</div>
 	</div>
 	<script type="text/javascript" src="./app.js"></script>
 </body>

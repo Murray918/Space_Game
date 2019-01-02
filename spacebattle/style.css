@@ -21,12 +21,7 @@ div {
 #enemyContainer {
 	text-align: center;
 }
-#attack {
-	width: 10%;
-	display: block;
-	margin: 10px auto;
-}
-#missles {
+#attack, #missles, #retreat {
 	width: 10%;
 	display: block;
 	margin: 10px auto;

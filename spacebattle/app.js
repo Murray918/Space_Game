@@ -1,3 +1,4 @@
+//Class resposible for constructing ship objects
 class Ship {
 	constructor(shipName, hull, firepower, accuracy, shipCount, img) {
 		this.shipName = shipName
@@ -17,13 +18,15 @@ class Ship {
 				target.hull = 0
 			else
 				target.hull-=this.firepower
-			console.log(this.shipName+" hit "+target.shipName+" for "+this.firepower+" damage!")
+			
 		}
 		else {
-			console.log(this.shipName+" missed!")
+			
 		}
 	}
 }
+//Data resposible for holding all players, npcs, users choices and counters for the amount of aliens left
+//and Bosses weapon pods left
 let bossPods = []
 let alienBoss = null
 let USS_Assembly = null
@@ -31,6 +34,7 @@ let alienShips = []
 let shipCount = 1
 let chooseShip = 0
 let podCounter = 0
+//function to populate the battle with a random amount of aliens, one player and a boss
 function populateBattle() {
 	USS_Assembly = new Ship("USS_Assembly", 20, 5, .7, 0, "./images/heroShip.png")
 	alienBoss = new Ship("Alien Boss", 20, 6, .7, 0, "./images/alienShip.jpg")
@@ -49,7 +53,6 @@ function populateBattle() {
 		$("#enemyContainer").append(`<img src="${ship.img}" class="alienShip alienShip${shipCount}"></img>`)
 		$(`.alienShip${shipCount}`).click(function() {
 			chooseShip = ship.shipCounter
-			console.log(`alienShip${chooseShip}`)
 			$(".alienShip").css({"border":"none"})
 			$(this).css({"border":"solid white"})
 		})
@@ -69,11 +72,11 @@ function populateBattle() {
 	}
 	shipCount--
 }
+//Data resposble for using missles and to check weather the player has encountered the boss yet
 let missleChoice = false
 let bossEncounter = false
 function shipBattle(shipChoice) {
 	shipChoice--
-	console.log(alienShips[shipChoice])
 	while(USS_Assembly.stillAlive() && alienShips[shipChoice].stillAlive()) {
 		let oldPower = USS_Assembly.firepower
 		if(missleChoice && USS_Assembly.missles>0) {
@@ -87,7 +90,7 @@ function shipBattle(shipChoice) {
 			let attackAfterShield = 0
 			let oldFirePower = alienShips[shipChoice].firepower
 			if(USS_Assembly.shields<alienShips[shipChoice].firepower) {
-				//console.log("Hello")
+				
 				attackAfterShield = alienShips[shipChoice].firepower-USS_Assembly.shields
 			}
 			alienShips[shipChoice].firepower = attackAfterShield
@@ -105,7 +108,7 @@ function shipBattle(shipChoice) {
 		{
 			$(`.alienShip${shipChoice+1}`).fadeOut()
 			shipCount--
-			console.log(alienShips[shipChoice].shipName+" has been destroyed!")
+			
 		}
 		refreshStats()	
 	}
@@ -134,8 +137,6 @@ function shipBattle(shipChoice) {
 				$(`.alienBoss`).click(function() {
 						if(podCounter<=0) {
 							chooseShip = 5
-							//console.log(shipChoice)
-							//console.log(alienShips[shipChoice])
 							$(".alienBoss").css({"border":"none"})
 							$(this).css({"border":"solid white"})
 						}
@@ -162,11 +163,11 @@ function shipBattle(shipChoice) {
 		}
 		else if(bossEncounter && podCounter>=1 && !bossPods[shipChoice].stillAlive()) {
 			podCounter--
-			console.log("dead")
 			$(`.bossPod${chooseShip}`).fadeOut()
 		}
 		
 }
+//Function to re-post the players current stats to the "player stats" window
 function refreshStats() {
 	$(".playerStats").empty()
 	$(".playerStats").append(`<p>${USS_Assembly.shipName}</p>
@@ -174,6 +175,7 @@ function refreshStats() {
 							  <p>Damage: ${USS_Assembly.firepower} Accuracy: ${USS_Assembly.accuracy}</p>
 							  <p>Missles: ${USS_Assembly.missles}</p>`)
 }
+//Reset button function
 $(".reset").click(function() {
 	bossEncounter = false
 	USS_Assembly = null
@@ -181,12 +183,18 @@ $(".reset").click(function() {
  	shipCount = 1
  	chooseShip = 0
  	bossPods = []
+ 	$(".gameContainer").show()
 	$(".heroShip").remove()
 	$(".enemyDeathContainer").hide()
 	$(".gameOverContainer").hide()
 	$("#enemyContainer").empty()
 	populateBattle()
 	refreshStats()
+})
+//Retreat button
+$("#retreat").click(function() {
+	$(".gameContainer").hide()
+	$(".gameOverContainer").show()
 })
 populateBattle()
 refreshStats()
