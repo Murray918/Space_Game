@@ -1,0 +1,16 @@
+p {
+	background-color: blue;
+	color:white;
+	width:500px;
+}
+#console{
+	background-color: grey;
+	position: absolute;
+	top:50px;
+	right:50px;
+	font-size:20px;
+	padding:20px;
+}
+#status{
+	list-style: none;
+}
