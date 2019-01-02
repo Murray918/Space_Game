@@ -78,7 +78,7 @@ let attackPhaseHuman = function() {
     if (alienFleet.length != 0) {
         if (earthShip.accuracy() === 'hit') {
             alienFleet[0].hull -= earthShip.firePower
-            console.log('you hit alien hull is ' + alienFleet[0].hull)
+            console.log('you hit, alien hull is at ' + alienFleet[0].hull)
             if (alienFleet[0].hull <= 0) { //if you kill the ship you get to attack first again
                 console.log('defeated alien')
                 alienFleet.shift()
