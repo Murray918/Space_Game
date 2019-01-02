@@ -28,6 +28,17 @@ accuracy - between .6 and .8 You should be battling six alien ships each with un
 */
 "use strict";
 
+//*******************************************************************************
+//This class keeps track of scores for Defender and Alien
+//*******************************************************************************
+class score {
+	constructor (name) {
+		this.name = name;
+		this.score = 0;
+	}
+}
+
+
 class shipStats {
 	constructor (name,iName) {
 		this.name = name;
@@ -203,9 +214,10 @@ class action extends shipStats{
 //-------------------------------------------------------------------------------
 //Hide the image of the ship then hide the text with hull.  This does the explode effect.
 //-------------------------------------------------------------------------------
-			$( "img" ).filter("." + attacker.iName).toggle( "explode" );
+			$( "img" ).filter("." + attacker.iName).toggle( "explode", 1000 );
 			//f = ".a" + attacker.iName;
-			$( "h5" ).filter(".a" + attacker.iName).toggle( "explode" );
+			$( "h5" ).filter(".a" + attacker.iName).toggle( "explode", 1000 );
+			
 			
 		} 
 		if (defender.hull <= 0) {
@@ -229,6 +241,8 @@ class action extends shipStats{
 			$(".fight").hide();
 			$( ".missleCount" ).hide();
 			$( ".instr" ).text("Push Replay button to Start Over")
+			alienScore.score++;
+			$( ".alienScore" ).text(alienScore.name + ": " + alienScore.score)
 			return 0;
 		} 
 
@@ -239,6 +253,9 @@ class action extends shipStats{
 			$( ".flee" ).prop("disabled", true);    //this refers to .flee class
 	   		$( ".fight" ).prop("disabled", true);
 	   		$( ".instr" ).text("Push Replay button to Start Over")
+	   		earthDefenderScore.score++;
+	   		$( ".defenderScore" ).text(earthDefenderScore.name + ": " + earthDefenderScore.score)
+
 	   		//$('#btn2').prop("disabled", true);
 		}
 	}
@@ -318,16 +335,39 @@ let aliens = [new shipStats("Predators","alien1"), new shipStats("Empire", "alie
 			  new shipStats("Kligons","alien5"),new shipStats("Geonosians","alien6"),
 			  new shipStats("Mega Godzilla","alien7"),new shipStats("Godzilla","alien8")];
 let numAliens = 0;
+let megaAlien = {};
+
+//-------------------------------------------------------------------------------
+//Create Score class to keep track of score
+//-------------------------------------------------------------------------------
+let earthDefenderScore = new score("USS Assembly");
+let alienScore = new score("Aliens");
+$( ".defenderScore" ).text(earthDefenderScore.name + ": " + earthDefenderScore.score)
+$( ".alienScore" ).text(alienScore.name + ": " + alienScore.score)
+
 
 function doGame() {
 	aliens = [new shipStats("Predators","alien1"), new shipStats("Empire", "alien2"),
 				  new shipStats("Borg", "alien3"), new shipStats("Count Dooku","alien4"),
 				  new shipStats("Kligons","alien5"),new shipStats("Geonosians","alien6"),
 				  new shipStats("Mega Godzilla","alien7"),new shipStats("Godzilla","alien8")];
-	
 
-	
-	numAliens = random(4,aliens.length);
+$('*').tooltip();
+/*
+//-------------------------------------------------------------------------------
+//Create the maga alien
+//-------------------------------------------------------------------------------	
+	megaAlien = new shipStats("Mega Alien","alienmega")
+	megaAlien.setStats([10,5,0.7,0,0]);
+	$( "img" ).filter("." + megaAlien.iName).css("padding", megaAlien.hull);
+	$( "img" ).filter("." + megaAlien.iName).css("background","white");
+	$( "h5" ).filter(".a" + megaAlien.iName).text("Hull = " + megaAlien.hull);
+	$( "img" ).filter("." + megaAlien.iName).hide();   //hide the mega Alien to casue a surprise attack
+	$( "h5" ).filter(".a" + megaAlien.iName).hide();
+	//console.log(megaAlien);
+*/
+
+	numAliens = random(5,aliens.length);
 	container = $('.alien_pics');
 	checked = $(".moo2").is( ":checked" )
 	$(".flee").show();
@@ -431,7 +471,9 @@ function doGame() {
 		//choseInterval = setInterval(blink_text_chose, 1000);
 		$( "h5" ).show("slow");
 		$( "img" ).show("slow");
+		
 	},5000); 
+
 
 	//-------------------------------------------------------------------------------
 	//Create a single action class
@@ -450,9 +492,20 @@ function doGame() {
 	 	//console.log(x);
 	 	if (checked === true) {
 	 		pickAlien(x);
-	 		$( ".alien_pics" ).children().eq(x).remove();
+	 		window.setTimeout(() =>{ $( ".alien_pics" ).children().eq(x).remove(); },700);
 	 	}
 	});
+/*
+	$( ".mega_pics" ).children().click(function() {
+	  	//let x = $(this).index();
+	 	//console.log(x);
+	 	if (checked === true) {
+	 		pickAlien(0);
+	 		$( ".mega_pics" ).remove(); 
+	 	}
+	});
+*/
+
 }  //end of doGame
 
 function pickAlien(x) {
@@ -461,6 +514,18 @@ function pickAlien(x) {
 	//console.log(aliens)
 	let justObj = attacker[0];
 	attacker = justObj;
+
+/*
+//-------------------------------------------------------------------------------
+//Must destroy Mega Ship if Mega ship appears
+//-------------------------------------------------------------------------------
+	//$( "img" ).filter("." + megaAlien.iName).hide();
+	if( $( "img" ).filter("." + megaAlien.iName).is(':visible') && checked){
+		console.log("dsfdsf");
+		globalAction.attack(earthDefender,megaAlien,aliens);
+		return 0;
+	}
+*/
 //-------------------------------------------------------------------------------
 //Attack 1st alien ship
 //-------------------------------------------------------------------------------
@@ -479,6 +544,8 @@ function pickAlien(x) {
 
 
 $( ".fight" ).click(function() {
+	$( ".fight" ).prop("disabled", true);
+    
 	let attacker = "";
 	let justObj = "";
 	let x = 0;
@@ -506,9 +573,10 @@ $( ".fight" ).click(function() {
 //Fight is over.  Determine winner and act accordingly
 //-------------------------------------------------------------------------------
 		globalAction.afterFight(earthDefender,attacker);
-		$( ".alien_pics" ).children().eq(x).remove();
+		window.setTimeout(() =>{ $( ".alien_pics" ).children().eq(x).remove(); $( ".fight" ).prop("disabled", false); },700);
 		
 	} 
+
 	return 0;
 });
 
@@ -541,7 +609,11 @@ $( ".flee" ).click(function() {
 	$( ".fight" ).prop("disabled", true);
 	$( ".alien_pics").children().unbind( "click" );
 	$(".flee").hide();
+	$( ".fight" ).hide();
 	$( ".instr" ).text("Push Replay button to Start Over")
+	$( ".missleCount").hide();
+	alienScore.score++;
+	$( ".alienScore" ).text(alienScore.name + ": " + alienScore.score)
 
 	return 0;
 });

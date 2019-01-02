@@ -32,6 +32,27 @@ a {
   max-width: 150px;
   max-height: 175px;
 }
+
+.mega_pics {
+  display: table;
+  width: 100%;
+  margin: 30px auto;
+}
+.mega_pics span {
+  display: table-cell;
+  text-align: center;
+  width: 100%; 
+  color: white; 
+  
+}
+.mega_pics img {
+  width: 100%;
+  max-width: 300px;
+  max-height: 250px;
+}
+
+
+
 /*
 .alien1 {
   padding: 1px 1px 1px 1px;
@@ -61,7 +82,7 @@ a {
 .defender_pic {
   position: absolute;
   top: 58%;
-  left: 44%;
+  left: 43%;
   display: table-cell;
   text-align: center;
   width: 200px;
@@ -215,7 +236,13 @@ a {
   	color: #FFFFFF;
   	font-size: 12px;
 }
-
+.score1 {
+	position:absolute;
+  	top:82%;
+  	left:2%;
+  	color: #FFFFFF;
+  	font-size: 12px;
+}
 /*
 .battleText {
 	position:absolute;
