@@ -18,20 +18,28 @@ function alienAttack() {
 	let y = Math.random()
 	if (y <= .6 || y <= .8){
 		UssAssembly.hull -= alienStats(2,4)
+		console.log("------------------------------")
 		console.log("Alien has registered hit!")
+		console.log("------------------------------")
 	}
 	else {
+		console.log("-----------------")
 		console.log("Alien has missed!")
+		console.log("-----------------")
 	}
 }
 function humanAttack() {
 	let x = Math.random()
 	if (x <= .7){
 		alienShips[0].hull -= 5
+		console.log("-------------------------------")
 		console.log("UssAssembly has registered hit!")
+		console.log("-------------------------------")
 	}
 	else {
-		console.log("UssAssembly has missed!")
+		console.log("-------------------------------")
+		console.log("Oh no...UssAssembly has missed!")
+		console.log("-------------------------------")
 	} 
 }
 
@@ -42,7 +50,7 @@ let UssAssembly = {
 	firepower : 5,
 	accuracy: .7
 }
-// creat alien class
+// create alien class
  class aliens  {
  	constructor() {
 	this.hull =  alienStats(3,6),
@@ -64,14 +72,16 @@ function battle () {
 		alienAttack()
 	}
 	if (alienShips[0].hull <= 0){
-		console.log("********************************")
-		console.log("Alien ship has been destroyed!")
-		console.log("********************************")
+		console.log("**************************************************")
+		console.log("Alien ship has been destroyed! " + (alienShips.length -1) + " Alien ships left!")
+		console.log("**************************************************")
 		alienShips.shift()
 	
 	}
 	else if (UssAssembly.hull <= 0){
+		console.log("----------------------------")
 		console.log("Our ship has been destroyed!")
+		console.log("----------------------------")
 	}
 }
 
@@ -88,5 +98,3 @@ function newBattle() {
 }		 }
 newBattle()
 victory()
-console.log(UssAssembly)
-console.log(alienShips.length)
