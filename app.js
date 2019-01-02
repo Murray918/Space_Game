@@ -67,12 +67,12 @@ function battle () {
 		alienAttack()
 	}
 	if (alienShips[0].hull <= 0){
-		console.log("alien destroyed")
+		console.log("alien ship has been destroyed!")
 		alienShips.shift()
 	
 	}
 	else if (UssAssembly.hull <= 0){
-		console.log("human destroyed, game over!")
+		console.log("Our ship has been destroyed!")
 	}
 }
 function game () {
@@ -88,15 +88,21 @@ function game () {
 						battle()
 						if (UssAssembly.hull >= 1){
 							battle()
-						}else if(UssAssembly.hull<=0){console.log("1game over")}
-					}else if(UssAssembly.hull<=0){console.log("2game over")}
-				}else if(UssAssembly.hull<=0){console.log("3game over")}
-			} else if(UssAssembly.hull<=0){console.log("4game over")}
-		} else if (UssAssembly.hull <= 0){console.log("5assembly destroyed,game over!")}
-	} else if (UssAssembly.hull <= 0){console.log("6Assembly destroyed, game over!")}
-	else if(UssAssembly.hull<=0){console.log("7Assembly destroyed,game over")}
+						}else if(UssAssembly.hull<=0){console.log("UssAssembly has been destroyed...game over!")}
+					}else if(UssAssembly.hull<=0){console.log("UssAssembly has been destroyed...game over!")}
+				}else if(UssAssembly.hull<=0){console.log("UssAssembly has been destroyed..game over!")}
+			} else if(UssAssembly.hull<=0){console.log("UssAssembly has been destroyed...game over!")}
+		} else if (UssAssembly.hull <= 0){console.log("UssAssembly has been destroyed...game over!")}
+	} else if (UssAssembly.hull <= 0){console.log("UssAssembly has been destroyed, game over!")}
+	else if(UssAssembly.hull<=0){console.log("UssAssembly has been destroyed,game over!")}
 }
-
+function victory () {
+	if(alienShips.length === 0){
+		console.log("All alien ships have been destroyed, Earth is saved!")
+	}
+	else {console.log("Our ships have been defeated...Earth is lost!")}
+}
 game()
+victory()
 console.log(UssAssembly)
 console.log(alienShips.length)
