@@ -1,4 +1,5 @@
 
+
 // create Ship class to use as prototype of all ships in game
 class Ship {
     constructor(name, hull, firepower, accuracy) {
@@ -9,11 +10,15 @@ class Ship {
     }
     attack(enemy) {
         if (Math.random() > this.accuracy) {
+        	console.log("==============================")
             console.log(`${this.name} missed`);
+            console.log("==============================")
             return `${enemy.name} hull: ${enemy.hull}`
         } else {
             enemy.hull -= this.firepower;
+            console.log("==============================")
             console.log(`${this.name} dealt ${this.firepower} damage.`);
+            console.log("==============================")
             return `${enemy.name} hull: ${enemy.hull}`
         }
     }
@@ -32,12 +37,11 @@ for (let i = 0; i < 6; i++) {
     alienFleet[i] = new Ship(`Alien Ship ${i+1}`, (Math.floor(Math.random() * (7 - 3) + 3)), (Math.floor(Math.random() * (5 - 2) + 2)), (Math.random() * (0.8 - 0.6) + 0.6))
 }
 
+// set boolean variable for controlling loops
+let choice = false
 
 // loop for whole game: while USSA hull >0 and alienFleet.length > 0
-while (USSA.hull > 0 && alienFleet.length > 0) {
-
-    console.log("==============================")
-    console.log("==============================")
+while (USSA.hull > 0 && alienFleet.length > 0 && choice === false) {
 
     USSA.attack(alienFleet[0]);
     USSA.update();
@@ -60,10 +64,12 @@ while (USSA.hull > 0 && alienFleet.length > 0) {
         // remove 1st alien ship from alienFleet
         alienFleet.shift();
         console.log(`Alien Ships left: ${alienFleet.length}`);
-
+        // switch value of choice to true in order to stop the while loop and await user input (button click event)
+        choice = true;
         // prompt player: "attack next alien ship" or "retreat"?, log 'game over' and break if retreat
         
     }
+
 }
 // console log victory if the while loop completes due to all alien ships being destroyed, not USSA.hull < 0
 if (USSA.hull > 0 && alienFleet.length === 0) {
