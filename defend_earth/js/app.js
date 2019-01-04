@@ -28,15 +28,6 @@ accuracy - between .6 and .8 You should be battling six alien ships each with un
 */
 "use strict";
 
-//*******************************************************************************
-//This class keeps track of scores for Defender and Alien
-//*******************************************************************************
-class score {
-	constructor (name) {
-		this.name = name;
-		this.score = 0;
-	}
-}
 
 
 class shipStats {
