@@ -26,7 +26,7 @@ class Ship {
 }
 
 // create USS Assembly ship with pre-determined parameters
-let USSA = new Ship("USS Assembly", 10, 5, 0.7);
+let USSA = new Ship("USS Assembly", 20, 5, 0.7);
 
 // create array to hold 6 alien ships with randomly generated parameter values that fit within pre-determined range
 let alienFleet = [];
