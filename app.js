@@ -38,9 +38,12 @@ for (let i = 0; i < 6; i++) {
 }
 
 // set boolean variable for controlling loops
-let choice = false
+let choice = true
 
-// loop for whole game: while USSA hull >0 and alienFleet.length > 0
+// create button to start first loop
+$("#attack").click(function() {
+    choice = false;
+    // loop for whole game: while USSA hull >0 and alienFleet.length > 0
 while (USSA.hull > 0 && alienFleet.length > 0 && choice === false) {
 
     USSA.attack(alienFleet[0]);
@@ -54,6 +57,7 @@ while (USSA.hull > 0 && alienFleet.length > 0 && choice === false) {
         alienFleet[0].attack(USSA);
         USSA.update();
         alienFleet[0].update();
+        choice = true;
 
         if (USSA.hull <= 0) {
             console.log("Game Over");
@@ -61,16 +65,22 @@ while (USSA.hull > 0 && alienFleet.length > 0 && choice === false) {
         }
 
     } else {
-        // remove 1st alien ship from alienFleet
+        $(".ship:eq(0)").replaceWith("<img class = 'ship' src ='./explosion.png'/>");
+        let timeoutID = window.setTimeout(function() {
+           // remove 1st alien ship from alienFleet
         alienFleet.shift();
         console.log(`Alien Ships left: ${alienFleet.length}`);
+        // remove current .ship element from DOM
+        $(".ship:eq(0)").remove();
+        }, 1000)
         // switch value of choice to true in order to stop the while loop and await user input (button click event)
-        choice = true;
-        // prompt player: "attack next alien ship" or "retreat"?, log 'game over' and break if retreat
-        
+        choice = true; 
     }
 
 }
+})
+
+
 // console log victory if the while loop completes due to all alien ships being destroyed, not USSA.hull < 0
 if (USSA.hull > 0 && alienFleet.length === 0) {
     console.log("Victory!")
